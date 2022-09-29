@@ -1,4 +1,4 @@
-package com.aed.model;
+package com.model;
 
 /*
  * author Chakradhar Grandhi
@@ -24,6 +24,10 @@ public class ContactInfo {
 	}
 	public void setEmail(String email) {
 		this.email=email;
+	}
+	@Override
+	public String toString() {
+		return "ContactInfo [CellPhone=" + contactNumber + ", email=" + email + "]";
 	}
 	
 

@@ -1,4 +1,4 @@
-package com.aed.model;
+package com.model;
 import java.awt.Image;
 import java.time.LocalDate;
 
@@ -11,8 +11,8 @@ public class Employee {
 	 private Image image;
 	 private LocalDate startDate;
 	 
-	 public Employee(String name,int employeeID,int age,String gender,LocalDate startDate,
-			 String level,String teamInfo,String positionTitle,ContactInfo contactInfo,Image image){
+	 public Employee(int employeeID,String name,int age,String gender,LocalDate startDate,
+			 String level,String teamInfo,String positionTitle,ContactInfo contactInfo/*Image image*/){
 		 super();
 		 this.name = name;
 		 this.employeeID = employeeID;
@@ -23,7 +23,8 @@ public class Employee {
 		 this.teamInfo = teamInfo;
 		 this.positionTitle = positionTitle;
 		 this.contactInfo = contactInfo;
-		 this.image = image;
+		 /*this.image = image;
+		  */
 		 
 	 }
 	 
