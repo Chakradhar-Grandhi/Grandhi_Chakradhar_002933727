@@ -1,3 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/*
+ * author Chakradhar Grandhi
+ * NEUID: 002933727
+ */
+
 package com.model;
 import java.awt.Image;
 import java.time.LocalDate;
@@ -9,9 +19,9 @@ public class Employee {
 	 private int employeeID, age;
 	 private ContactInfo contactInfo;
 	 private Image image;
-	 private LocalDate startDate;
+	 private String startDate;
 	 
-	 public Employee(int employeeID,String name,int age,String gender,LocalDate startDate,
+	 public Employee(int employeeID,String name,int age,String gender,String startDate,
 			 String level,String teamInfo,String positionTitle,ContactInfo contactInfo/*Image image*/){
 		 super();
 		 this.name = name;
@@ -61,11 +71,11 @@ public class Employee {
 		 
 	 }
 	 
-	 public LocalDate getStartDate() {
+	 public String getStartDate() {
 		 return startDate;
 	 }
 	 
-	 public void setStartDate(LocalDate startDate) {
+	 public void setStartDate(String startDate) {
 		 this.startDate = startDate;
 		 
 		 
@@ -124,3 +134,4 @@ public class Employee {
 	 
 
 }
+
