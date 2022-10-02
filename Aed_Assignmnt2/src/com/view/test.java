@@ -19,8 +19,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class test extends javax.swing.JFrame {
     int empID=1001;
-    String gender,levelInfo,positionInfo;
+    
+    
     List<Employee> empDetails= new ArrayList<>();
+    boolean a = empDetails.add(new Employee(empID++, "Chakradhar", 23, "Male",
+            "2020-12-05",
+            "L1", "CISCO", "Manager", new ContactInfo("7538882245", "chakradhargrandhi01@gmail.com")));
+    boolean b = empDetails.add(new Employee(empID++, "Vasudha", 23, "Female",
+            "2021-01-12",
+    "L2", "SAP", "Lead", new ContactInfo("6281537224", "vasu.vasudha05@gmail.com")));
     
 
     /**
@@ -29,6 +36,7 @@ public class test extends javax.swing.JFrame {
     public test() {
         initComponents();
         resetData();
+        setEmployeeTable();
     }
 
     /**
@@ -43,6 +51,9 @@ public class test extends javax.swing.JFrame {
         genderGroup = new javax.swing.ButtonGroup();
         levelGroup = new javax.swing.ButtonGroup();
         positionGroup = new javax.swing.ButtonGroup();
+        mGenderGroup = new javax.swing.ButtonGroup();
+        mLevelGroup = new javax.swing.ButtonGroup();
+        mPositionGroup = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         name = new javax.swing.JTextField();
@@ -82,11 +93,9 @@ public class test extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         mContact = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        mPosition = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         mTeamInfo = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        mLevel = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         mStartDate = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -96,8 +105,15 @@ public class test extends javax.swing.JFrame {
         mName = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        mMale = new javax.swing.JRadioButton();
+        mFemale = new javax.swing.JRadioButton();
+        mLevel1 = new javax.swing.JRadioButton();
+        mLevel2 = new javax.swing.JRadioButton();
+        mLevel3 = new javax.swing.JRadioButton();
+        mLevel4 = new javax.swing.JRadioButton();
+        mManager = new javax.swing.JRadioButton();
+        mLead = new javax.swing.JRadioButton();
+        mEngineer = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -312,7 +328,7 @@ public class test extends javax.swing.JFrame {
                 .addContainerGap(384, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("Add Employee Details", jPanel1);
 
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -325,9 +341,19 @@ public class test extends javax.swing.JFrame {
                 "Employee ID", "Name", "Age", "Gender", "Start Date", "Level", "Team", "Position", "Contact", "Email"
             }
         ));
+        employeeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeeTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(employeeTable);
 
         jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Photo ");
 
@@ -340,12 +366,6 @@ public class test extends javax.swing.JFrame {
         jLabel12.setText("Email");
 
         jLabel13.setText("Contact Number");
-
-        mPosition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mPositionActionPerformed(evt);
-            }
-        });
 
         jLabel14.setText("Position");
 
@@ -369,9 +389,77 @@ public class test extends javax.swing.JFrame {
 
         jButton3.setText("Delete");
 
-        jRadioButton1.setText("Male");
+        mGenderGroup.add(mMale);
+        mMale.setText("Male");
+        mMale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mMaleActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Female");
+        mGenderGroup.add(mFemale);
+        mFemale.setText("Female");
+        mFemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mFemaleActionPerformed(evt);
+            }
+        });
+
+        mLevelGroup.add(mLevel1);
+        mLevel1.setText("Level 1");
+        mLevel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mLevel1ActionPerformed(evt);
+            }
+        });
+
+        mLevelGroup.add(mLevel2);
+        mLevel2.setText("Level 2");
+        mLevel2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mLevel2ActionPerformed(evt);
+            }
+        });
+
+        mLevelGroup.add(mLevel3);
+        mLevel3.setText("Level 3");
+        mLevel3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mLevel3ActionPerformed(evt);
+            }
+        });
+
+        mLevelGroup.add(mLevel4);
+        mLevel4.setText("Level 4");
+        mLevel4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mLevel4ActionPerformed(evt);
+            }
+        });
+
+        mPositionGroup.add(mManager);
+        mManager.setText("Manager");
+        mManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mManagerActionPerformed(evt);
+            }
+        });
+
+        mPositionGroup.add(mLead);
+        mLead.setText("Lead");
+        mLead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mLeadActionPerformed(evt);
+            }
+        });
+
+        mPositionGroup.add(mEngineer);
+        mEngineer.setText("Engineer");
+        mEngineer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mEngineerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -395,10 +483,7 @@ public class test extends javax.swing.JFrame {
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(mEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(mImage, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addGap(138, 138, 138)
-                                    .addComponent(mPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel14))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -412,17 +497,30 @@ public class test extends javax.swing.JFrame {
                                             .addComponent(jLabel16)
                                             .addComponent(jLabel20))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(mTeamInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                                    .addComponent(mLevel)
-                                    .addComponent(mStartDate)
-                                    .addComponent(mAge)
-                                    .addComponent(mName)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jRadioButton1)
-                                        .addGap(55, 55, 55)
-                                        .addComponent(jRadioButton2)))))
+                                        .addComponent(mManager)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(mLead)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(mEngineer))
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(mTeamInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                                        .addComponent(mStartDate)
+                                        .addComponent(mAge)
+                                        .addComponent(mName)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(mMale)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(mFemale))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(mLevel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(mLevel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(mLevel3)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(mLevel4))))))
                         .addGap(0, 204, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
@@ -452,26 +550,31 @@ public class test extends javax.swing.JFrame {
                         .addComponent(jLabel18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(mMale)
+                            .addComponent(mFemale))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel17)
                     .addComponent(mStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
+                    .addComponent(jLabel16)
+                    .addComponent(mLevel1)
+                    .addComponent(mLevel2)
+                    .addComponent(mLevel3)
+                    .addComponent(mLevel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(mTeamInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(mPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                    .addComponent(mManager)
+                    .addComponent(mLead)
+                    .addComponent(mEngineer))
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(mContact, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -487,10 +590,10 @@ public class test extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Modify Employee Details", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -509,15 +612,9 @@ public void resetData(){
         name.setText("");
         age.setText("");
         startDate.setText("");
-        /*
-        male.setSelected(true);
-        female.setSelected(false);
-        level1.setSelected(false);
-        level2.setSelected(false);
-        level3.setSelected(false);
-        level4.setSelected(false);
-        */
-        
+        genderGroup.clearSelection();
+        levelGroup.clearSelection();
+        positionGroup.clearSelection();       
         email.setText("");
         phone.setText("");
         teamInfo.setText("");
@@ -525,6 +622,92 @@ public void resetData(){
         teamInfo.setText("");
     
     }
+public void resetMData(){
+        mName.setText("");
+        mAge.setText("");
+        mStartDate.setText("");
+        mGenderGroup.clearSelection();
+        mLevelGroup.clearSelection();
+        mPositionGroup.clearSelection();       
+        mEmail.setText("");
+        mContact.setText("");
+        mTeamInfo.setText("");
+        mImage.setText("");
+        mTeamInfo.setText("");
+    
+    }
+
+
+public void DisplayData(Employee emp){
+    mName.setText(emp.getName());
+    mAge.setText(emp.getAge()+"");
+    
+    if(emp.getGender() == "Male")
+        mMale.setSelected(true);
+    else
+        mFemale.setSelected(true);
+    mStartDate.setText(emp.getStartDate());
+    if(emp.getLevel()=="L1")
+        mLevel1.setSelected(true);
+    else if(emp.getLevel()=="L2")
+        mLevel2.setSelected(true);
+    else if(emp.getLevel()=="L3")
+        mLevel3.setSelected(true);
+    else 
+        mLevel4.setSelected(true);
+    
+    mTeamInfo.setText(emp.getTeamInfo());
+    
+    if(emp.getPositionTitle()=="Manager")
+        mManager.setSelected(true);
+    else if(emp.getPositionTitle()=="Lead")
+        mLead.setSelected(true);
+    else
+        mEngineer.setSelected(true);
+    
+    mContact.setText(emp.getContactInfo().getContactNumber());
+    mEmail.setText(emp.getContactInfo().getEmail());
+    
+    
+    
+    
+}
+    public Employee fetchData(){
+        
+        int tempID = Integer.parseInt(employeeTable.getValueAt(employeeTable.getSelectedRow(), NORMAL).toString());
+        for(Employee index : empDetails){
+            if (index.getEmployeeID() == tempID)
+                return index;
+        }     
+        return null;
+    }
+
+    private void UpdateData(Employee tempEmp) {
+    
+        for(Employee index: empDetails){
+            if(index.getEmployeeID()==tempEmp.getEmployeeID()){
+                index.setName(mName.getText());
+                index.setAge(Integer.parseInt(mAge.getText()));
+                index.setStartDate(mStartDate.getText());
+                if((index.getGender()== "Male" && mMale.isSelected()==false) ||(index.getGender()== "Female" && mFemale.isSelected()==false) )
+                    index.setGender(mGenderGroup.getSelection().getActionCommand());
+                index.setTeamInfo(mTeamInfo.getText());
+                
+                if((index.getLevel()=="L1" && mLevel1.isSelected() == false) || (index.getLevel()=="L2" && mLevel2.isSelected() == false) || (index.getLevel()=="L3" && mLevel3.isSelected() == false) || (index.getLevel()=="L4" && mLevel4.isSelected() == false) )
+                     index.setLevel(mLevelGroup.getSelection().getActionCommand());
+                if((index.getPositionTitle()=="Manager" && mManager.isSelected() == false) || (index.getPositionTitle()=="Lead" && mLead.isSelected() == false) ||(index.getPositionTitle()=="Engineer" && mEngineer.isSelected() == false) )
+                    index.setPositionTitle(mPositionGroup.getSelection().getActionCommand());
+                index.setContactInfo(new ContactInfo(mContact.getText(),mEmail.getText()));
+                setEmployeeTable();
+                System.out.println("Data Updated");
+                resetMData();
+                
+                
+                
+            }
+        }
+    }
+
 class SortById implements Comparator<Employee> {
 
         public int compare(Employee a, Employee b) {
@@ -562,14 +745,14 @@ class SortById implements Comparator<Employee> {
 
     private void maleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleActionPerformed
         // TODO add your handling code here:
-        gender="Male";
+        
         male.setActionCommand("Male");
         
     }//GEN-LAST:event_maleActionPerformed
 
     private void femaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleActionPerformed
         // TODO add your handling code here:
-        gender = "Female";
+        
         female.setActionCommand("Female");
         
     }//GEN-LAST:event_femaleActionPerformed
@@ -577,10 +760,6 @@ class SortById implements Comparator<Employee> {
     private void mTeamInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mTeamInfoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mTeamInfoActionPerformed
-
-    private void mPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mPositionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mPositionActionPerformed
 
     private void mEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mEmailActionPerformed
         // TODO add your handling code here:
@@ -603,7 +782,7 @@ class SortById implements Comparator<Employee> {
 
     private void level1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_level1ActionPerformed
         // TODO add your handling code here:
-        levelInfo = "L1";
+        
         level1.setActionCommand("L1");
     }//GEN-LAST:event_level1ActionPerformed
 
@@ -631,6 +810,69 @@ class SortById implements Comparator<Employee> {
         // TODO add your handling code here:
         lead.setActionCommand("Lead");
     }//GEN-LAST:event_leadActionPerformed
+
+    private void employeeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeTableMouseClicked
+        // TODO add your handling code here:
+       Employee tempEmp = fetchData();
+       DisplayData(tempEmp);
+       
+       
+       
+        
+    }//GEN-LAST:event_employeeTableMouseClicked
+
+    private void mLevel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mLevel1ActionPerformed
+        // TODO add your handling code here:
+        mLevel1.setActionCommand("L1");
+    }//GEN-LAST:event_mLevel1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Employee tempEmp = fetchData();
+        UpdateData(tempEmp);
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void mMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mMaleActionPerformed
+        // TODO add your handling code here:
+        mMale.setActionCommand("Male");
+    }//GEN-LAST:event_mMaleActionPerformed
+
+    private void mFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mFemaleActionPerformed
+        // TODO add your handling code here:
+        mFemale.setActionCommand("Female");
+    }//GEN-LAST:event_mFemaleActionPerformed
+
+    private void mLevel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mLevel2ActionPerformed
+        // TODO add your handling code here:
+        mLevel2.setActionCommand("L2");
+    }//GEN-LAST:event_mLevel2ActionPerformed
+
+    private void mLevel3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mLevel3ActionPerformed
+        // TODO add your handling code here:
+        mLevel3.setActionCommand("L3");
+    }//GEN-LAST:event_mLevel3ActionPerformed
+
+    private void mLevel4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mLevel4ActionPerformed
+        // TODO add your handling code here:
+        mLevel4.setActionCommand("L4");
+    }//GEN-LAST:event_mLevel4ActionPerformed
+
+    private void mManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mManagerActionPerformed
+        // TODO add your handling code here:
+        mManager.setActionCommand("Manager");
+    }//GEN-LAST:event_mManagerActionPerformed
+
+    private void mLeadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mLeadActionPerformed
+        // TODO add your handling code here:
+        mLead.setActionCommand("Lead");
+    }//GEN-LAST:event_mLeadActionPerformed
+
+    private void mEngineerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mEngineerActionPerformed
+        // TODO add your handling code here:
+        mEngineer.setActionCommand("Engineer");
+    }//GEN-LAST:event_mEngineerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -699,8 +941,6 @@ class SortById implements Comparator<Employee> {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton lead;
@@ -712,10 +952,20 @@ class SortById implements Comparator<Employee> {
     private javax.swing.JTextField mAge;
     private javax.swing.JTextField mContact;
     private javax.swing.JTextField mEmail;
+    private javax.swing.JRadioButton mEngineer;
+    private javax.swing.JRadioButton mFemale;
+    private javax.swing.ButtonGroup mGenderGroup;
     private javax.swing.JTextField mImage;
-    private javax.swing.JTextField mLevel;
+    private javax.swing.JRadioButton mLead;
+    private javax.swing.JRadioButton mLevel1;
+    private javax.swing.JRadioButton mLevel2;
+    private javax.swing.JRadioButton mLevel3;
+    private javax.swing.JRadioButton mLevel4;
+    private javax.swing.ButtonGroup mLevelGroup;
+    private javax.swing.JRadioButton mMale;
+    private javax.swing.JRadioButton mManager;
     private javax.swing.JTextField mName;
-    private javax.swing.JTextField mPosition;
+    private javax.swing.ButtonGroup mPositionGroup;
     private javax.swing.JTextField mStartDate;
     private javax.swing.JTextField mTeamInfo;
     private javax.swing.JRadioButton male;
