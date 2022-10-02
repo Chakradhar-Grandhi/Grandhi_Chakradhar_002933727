@@ -86,7 +86,7 @@ public class test extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        update = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         mImage = new javax.swing.JTextField();
         mEmail = new javax.swing.JTextField();
@@ -104,7 +104,7 @@ public class test extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         mName = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
         mMale = new javax.swing.JRadioButton();
         mFemale = new javax.swing.JRadioButton();
         mLevel1 = new javax.swing.JRadioButton();
@@ -348,10 +348,10 @@ public class test extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(employeeTable);
 
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateActionPerformed(evt);
             }
         });
 
@@ -387,7 +387,12 @@ public class test extends javax.swing.JFrame {
 
         jLabel20.setText("Name");
 
-        jButton3.setText("Delete");
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
 
         mGenderGroup.add(mMale);
         mMale.setText("Male");
@@ -526,9 +531,9 @@ public class test extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(187, 187, 187)
-                .addComponent(jButton2)
+                .addComponent(update)
                 .addGap(167, 167, 167)
-                .addComponent(jButton3)
+                .addComponent(delete)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -588,8 +593,8 @@ public class test extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(update)
+                    .addComponent(delete))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -701,6 +706,22 @@ public void DisplayData(Employee emp){
                 setEmployeeTable();
                 System.out.println("Data Updated");
                 resetMData();
+                break;
+                
+                
+                
+            }
+        }
+    }
+    
+    public void DeleteData(Employee tempEmp){
+           for(Employee index: empDetails){
+            if(index.getEmployeeID()==tempEmp.getEmployeeID()){
+                empDetails.remove(empDetails.indexOf(index));
+                System.out.println("Data Deleted");
+                resetMData();
+                setEmployeeTable();
+                break;
                 
                 
                 
@@ -826,13 +847,13 @@ class SortById implements Comparator<Employee> {
         mLevel1.setActionCommand("L1");
     }//GEN-LAST:event_mLevel1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
         Employee tempEmp = fetchData();
         UpdateData(tempEmp);
         
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_updateActionPerformed
 
     private void mMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mMaleActionPerformed
         // TODO add your handling code here:
@@ -874,6 +895,12 @@ class SortById implements Comparator<Employee> {
         mEngineer.setActionCommand("Engineer");
     }//GEN-LAST:event_mEngineerActionPerformed
 
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        // TODO add your handling code here:
+        Employee tempEmp = fetchData();
+        DeleteData(tempEmp);
+    }//GEN-LAST:event_deleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -911,14 +938,13 @@ class SortById implements Comparator<Employee> {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
+    private javax.swing.JButton delete;
     private javax.swing.JTextField email;
     private javax.swing.JTable employeeTable;
     private javax.swing.JRadioButton engineer;
     private javax.swing.JRadioButton female;
     private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JTextField image;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -976,5 +1002,6 @@ class SortById implements Comparator<Employee> {
     private javax.swing.JTextField startDate;
     private javax.swing.JButton submit;
     private javax.swing.JTextField teamInfo;
+    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }
