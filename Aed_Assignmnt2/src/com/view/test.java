@@ -6,12 +6,19 @@ package com.view;
 
 import com.model.ContactInfo;
 import com.model.Employee;
+import com.model.Exceptions;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +26,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class test extends javax.swing.JFrame {
     int empID=1001;
+    int flag=0;
+    boolean modifyBool = false;
+    
+    
+    
     
     
     List<Employee> empDetails= new ArrayList<>();
@@ -116,6 +128,12 @@ public class test extends javax.swing.JFrame {
         mEngineer = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         startDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,6 +403,12 @@ public class test extends javax.swing.JFrame {
 
         jLabel19.setText("Age");
 
+        mName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mNameActionPerformed(evt);
+            }
+        });
+
         jLabel20.setText("Name");
 
         delete.setText("Delete");
@@ -613,7 +637,33 @@ public class test extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-public void resetData(){
+
+    public void MDatasetEditable(boolean bool){
+        System.out.println("Entered meditable function");
+    if(bool){
+        mName.setEditable(true);
+        mAge.setEditable(true);
+        mStartDate.setEditable(true);
+        mTeamInfo.setEditable(true);
+        mContact.setEditable(true);
+        mEmail.setEditable(true);
+        
+    }
+    else{
+        mName.setEditable(false);
+        mAge.setEditable(false);
+        mGenderGroup.clearSelection();
+        mStartDate.setEditable(false);
+        mLevelGroup.clearSelection();
+        mTeamInfo.setEditable(false);
+        mPositionGroup.clearSelection();
+        mContact.setEditable(false);
+        mEmail.setEditable(false);
+    }
+    }
+    
+    
+    public void resetData(){
         name.setText("");
         age.setText("");
         startDate.setText("");
@@ -688,9 +738,11 @@ public void DisplayData(Employee emp){
     }
 
     private void UpdateData(Employee tempEmp) {
+        int tempFlag=0;
     
         for(Employee index: empDetails){
             if(index.getEmployeeID()==tempEmp.getEmployeeID()){
+                
                 index.setName(mName.getText());
                 index.setAge(Integer.parseInt(mAge.getText()));
                 index.setStartDate(mStartDate.getText());
@@ -704,7 +756,15 @@ public void DisplayData(Employee emp){
                     index.setPositionTitle(mPositionGroup.getSelection().getActionCommand());
                 index.setContactInfo(new ContactInfo(mContact.getText(),mEmail.getText()));
                 setEmployeeTable();
-                System.out.println("Data Updated");
+                if(tempFlag==0){
+                    System.out.println("Data Updated");
+                    JOptionPane.showMessageDialog(this, "Details Successfully Updated");
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "No Details to Update");
+                    
+                
+                }
                 resetMData();
                 break;
                 
@@ -725,6 +785,253 @@ public void DisplayData(Employee emp){
                 
                 
                 
+            }
+        }
+    }
+    private void ValidateData() throws Exception {
+        //Name Validation
+        try {
+            if (name.getText().equals("")) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please enter name");
+            resetData();
+            flag = 1;
+        }
+
+        // Age Validation    
+        if (flag == 0) {
+            try {
+                if (age.getText().equals("") || !Pattern.matches("[1-9]{1}[0-9]{1}", age.getText())) {
+                    throw new Exception("Incorrect age");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Please enter Valid Age");
+                resetData();
+                flag = 1;
+            }
+        }
+
+        //GenderField Validation
+        if (flag == 0) {
+            try {
+                String gen;
+                if(male.isSelected()==false && female.isSelected()==false)
+                    throw new Exception("Gender not selected");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gender not selected");
+                resetData();
+                flag = 1;
+            }
+        }
+        //Date Validation
+        if (flag == 0) {
+            try {
+                if (Pattern.matches("[1-2]{1}[0-9]{3}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}", startDate.getText()) == false) {
+                    throw new Exception("Incorrect Date format");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Enter valid date of format(YYYY-MM-DD)");
+                resetData();
+                flag = 1;
+            }
+        }
+        if (flag == 0) {
+            LocalDate date = LocalDate.parse(startDate.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            try {
+                if (LocalDate.now().compareTo(date) < 0) {  //validation for future date
+                    throw new Exception("Date invalid. Date should not be in future");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Date invalid. Date should not be in future");
+                resetData();
+                flag = 1;
+            }
+        }
+        //level Field Validation
+        if (flag == 0) {
+            try {
+                if((level1.isSelected()==false) && (level2.isSelected()==false) && (level3.isSelected()==false) && (level4.isSelected()==false) )
+                        throw new Exception("Level not Selected");
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Level not Selected");
+                resetData();
+                flag = 1;
+            }
+        }
+        //teamField Validation
+        if (flag == 0) {
+            try {
+                if (teamInfo.getText().equals("")) {
+                    throw new Exception("Enter Team Information");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, " Enter team Information");
+                resetData();
+                flag = 1;
+            }
+        }
+
+        //PositionField Validation
+        if (flag == 0) {
+            try {
+                if((manager.isSelected() == false) && (engineer.isSelected() == false) && (lead.isSelected() == false) )
+                throw new Exception("Position not Selected");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Position not Selected");
+                resetData();
+                flag = 1;
+            }
+        }
+
+        //Contact Validation
+        if (flag == 0) {
+            try {
+                if (Pattern.matches("[1-9]{1}[0-9]{9}", phone.getText())) { //number validation
+                } else {
+                    throw new Exception("Invalid Number");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, " Invalid Number");
+                resetData();
+                flag = 1;
+            }
+        }
+
+        //Email Validation
+        if (flag == 0) {
+            try {
+                if (Pattern.matches("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$", email.getText())) {
+                } else {
+                    throw new Exception("Invalid Email");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Invalid Email");
+                resetData();
+                flag = 1;
+            }
+        }
+    }
+    
+    private void ValidateMData() throws Exception {
+        //Name Validation
+        try {
+            if (mName.getText().equals("")) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please enter name");
+            flag = 1;
+        }
+
+        // Age Validation    
+        if (flag == 0) {
+            try {
+                if (mAge.getText().equals("") || !Pattern.matches("[1-9]{1}[0-9]{1}", mAge.getText())) {
+                    throw new Exception("Incorrect age");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Please enter Valid Age");
+                flag = 1;
+            }
+        }
+
+        //GenderField Validation
+        if (flag == 0) {
+            try {
+                String gen;
+                if(mMale.isSelected()==false && mFemale.isSelected()==false)
+                    throw new Exception("Gender not selected");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gender not selected");
+                flag = 1;
+            }
+        }
+        //Date Validation
+        if (flag == 0) {
+            try {
+                if (Pattern.matches("[1-2]{1}[0-9]{3}-[0-1]{1}[0-9]{1}-[0-3]{1}[0-9]{1}", mStartDate.getText()) == false) {
+                    throw new Exception("Incorrect Date format");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Enter valid date of format(YYYY-MM-DD)");
+                
+                flag = 1;
+            }
+        }
+        if (flag == 0) {
+            LocalDate date = LocalDate.parse(mStartDate.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            try {
+                if (LocalDate.now().compareTo(date) < 0) {  //validation for future date
+                    throw new Exception("Date invalid. Date should not be in future");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Date invalid. Date should not be in future");
+                
+                flag = 1;
+            }
+        }
+        //level Field Validation
+        if (flag == 0) {
+            try {
+                if((mLevel1.isSelected()==false) && (mLevel2.isSelected()==false) && (mLevel3.isSelected()==false) && (mLevel4.isSelected()==false) )
+                        throw new Exception("Level not Selected");
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Level not Selected");
+                flag = 1;
+            }
+        }
+        //teamField Validation
+        if (flag == 0) {
+            try {
+                if (mTeamInfo.getText().equals("")) {
+                    throw new Exception("Enter Team Information");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, " Enter team Information");
+                flag = 1;
+            }
+        }
+
+        //PositionField Validation
+        if (flag == 0) {
+            try {
+                if((mManager.isSelected() == false) && (mEngineer.isSelected() == false) && (mLead.isSelected() == false) )
+                throw new Exception("Position not Selected");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Position not Selected");
+                flag = 1;
+            }
+        }
+
+        //Contact Validation
+        if (flag == 0) {
+            try {
+                if (Pattern.matches("[1-9]{1}[0-9]{9}", mContact.getText())) { //number validation
+                } else {
+                    throw new Exception("Invalid Number");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, " Invalid Number");
+                flag = 1;
+            }
+        }
+
+        //Email Validation
+        if (flag == 0) {
+            try {
+                if (Pattern.matches("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$", mEmail.getText())) {
+                } else {
+                    throw new Exception("Invalid Email");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Invalid Email");
+                flag = 1;
             }
         }
     }
@@ -788,10 +1095,18 @@ class SortById implements Comparator<Employee> {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
-        empDetails.add(new Employee(empID++, name.getText(),Integer.parseInt(age.getText()),genderGroup.getSelection().getActionCommand(), startDate.getText(),levelGroup.getSelection().getActionCommand(),teamInfo.getText(),positionGroup.getSelection().getActionCommand(), new ContactInfo (phone.getText(),email.getText())));
-        System.out.println("Data added");
-        resetData();
-        setEmployeeTable();
+        flag = 0;
+         try {
+            ValidateData();
+        } catch (Exception ex) {
+            Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         if(flag ==0){
+            empDetails.add(new Employee(empID++, name.getText(),Integer.parseInt(age.getText()),genderGroup.getSelection().getActionCommand(), startDate.getText(),levelGroup.getSelection().getActionCommand(),teamInfo.getText(),positionGroup.getSelection().getActionCommand(), new ContactInfo (phone.getText(),email.getText())));
+            System.out.println("Data added");
+            resetData();
+            setEmployeeTable();
+         }
         
         
     }//GEN-LAST:event_submitActionPerformed
@@ -849,8 +1164,45 @@ class SortById implements Comparator<Employee> {
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
-        Employee tempEmp = fetchData();
-        UpdateData(tempEmp);
+        
+        if(modifyBool){
+                 flag = 0;
+        try {
+           ValidateMData();
+        } catch (Exception ex) {
+            Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        if(flag ==0){
+            Employee tempEmp = fetchData();
+            System.out.println("Data Fetched");
+            UpdateData(tempEmp);
+            modifyBool=false;
+            MDatasetEditable(modifyBool);
+            
+        }
+            
+            
+        }
+        else{
+            if(employeeTable.getSelectedRow() == -1){
+                           try {
+                                if(employeeTable.getSelectedRow() == -1 )
+                                throw new Exception("Select a row to Update");
+                
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "Select a row to Update.");
+                            }
+            
+            }
+            else{
+                     modifyBool=true;
+                    JOptionPane.showMessageDialog(this, "Feilds are now Editable.Edit them and click on Update.");
+                    MDatasetEditable(modifyBool);
+                
+            }
+        
+        }   
+        
         
         
     }//GEN-LAST:event_updateActionPerformed
@@ -897,9 +1249,35 @@ class SortById implements Comparator<Employee> {
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
-        Employee tempEmp = fetchData();
-        DeleteData(tempEmp);
+                    if(employeeTable.getSelectedRow() == -1){
+                           try {
+                                if(employeeTable.getSelectedRow() == -1 )
+                                throw new Exception("Select a row to Delete");
+                
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "Select a row to Delete.");
+                            }
+            
+            }
+            else{
+                     
+                     Employee tempEmp = fetchData();
+                    DeleteData(tempEmp);
+                    setEmployeeTable();
+                
+            }
+
     }//GEN-LAST:event_deleteActionPerformed
+
+    private void mNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mNameActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        
+    MDatasetEditable(false);
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     /**
      * @param args the command line arguments
