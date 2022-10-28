@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * @author yashpawar
+ * @author Chakradhar Grandhi
  */
 public class Doctor {
 
