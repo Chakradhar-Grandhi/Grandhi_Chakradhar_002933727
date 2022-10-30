@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Additions extends javax.swing.JFrame {
     int communityId = 100,personId=200,commref=0,flag=0,perref=0;
+    String role = "SA";
     HashMap<Integer,Community> communityMap = new HashMap<>();
     HashMap<Integer,Person> personMap = new HashMap<>();
     
@@ -50,7 +51,7 @@ public class Additions extends javax.swing.JFrame {
      
      //Person Data Addition
      personMap.put(personId, new Person(personId, "Chakradhar",Integer.toString(personId++),"1234","SA",23,"Male","xyz",75,"Boston",100));  
-     personMap.put(personId, new Person(personId, "Rakshit",Integer.toString(personId++),"1234","CA",25,"Male","xyz",75,"Boston",100));     
+     personMap.put(personId, new Person(personId, "Rakshit",Integer.toString(personId++),"1234","CA",25,"Male","xyz",75,"Boston",101));     
      personMap.put(personId, new Person(personId, "Palak",Integer.toString(personId++),"1234","Doctor",21,"Female","xyz",881,"New York",102));        
 
 
@@ -74,6 +75,7 @@ public class Additions extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        lPerson = new javax.swing.JButton();
         pnlLayout = new javax.swing.JPanel();
         AddDoctor = new javax.swing.JPanel();
         community = new javax.swing.JTabbedPane();
@@ -164,19 +166,13 @@ public class Additions extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         jTable7 = new javax.swing.JTable();
         jButton9 = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        linkPerson = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        lPTable = new javax.swing.JTable();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        lCommTable = new javax.swing.JTable();
         jButton13 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTable9 = new javax.swing.JTable();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jTable10 = new javax.swing.JTable();
-        jButton14 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,6 +204,13 @@ public class Additions extends javax.swing.JFrame {
             }
         });
 
+        lPerson.setText("Link Person");
+        lPerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lPersonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -215,11 +218,13 @@ public class Additions extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(154, Short.MAX_VALUE))
+                    .addComponent(lPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +237,9 @@ public class Additions extends javax.swing.JFrame {
                 .addComponent(jButton10)
                 .addGap(46, 46, 46)
                 .addComponent(jButton11)
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(lPerson)
+                .addContainerGap(423, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -245,11 +252,11 @@ public class Additions extends javax.swing.JFrame {
         AddDoctor.setLayout(AddDoctorLayout);
         AddDoctorLayout.setHorizontalGroup(
             AddDoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 837, Short.MAX_VALUE)
+            .addGap(0, 869, Short.MAX_VALUE)
         );
         AddDoctorLayout.setVerticalGroup(
             AddDoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 795, Short.MAX_VALUE)
+            .addGap(0, 864, Short.MAX_VALUE)
         );
 
         pnlLayout.add(AddDoctor, "Doctor");
@@ -306,7 +313,7 @@ public class Additions extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
                         .addComponent(comSubmit)))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(293, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,7 +332,7 @@ public class Additions extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(68, 68, 68)
                 .addComponent(comSubmit)
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addContainerGap(518, Short.MAX_VALUE))
         );
 
         community.addTab("Add Community", jPanel2);
@@ -381,7 +388,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,7 +430,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         community.addTab("Edit Community", jPanel3);
@@ -448,7 +455,7 @@ public class Additions extends javax.swing.JFrame {
                     .addGroup(addHosLayout.createSequentialGroup()
                         .addGap(266, 266, 266)
                         .addComponent(jButton5)))
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
         addHosLayout.setVerticalGroup(
             addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,7 +466,7 @@ public class Additions extends javax.swing.JFrame {
                     .addComponent(jLabel10))
                 .addGap(79, 79, 79)
                 .addComponent(jButton5)
-                .addContainerGap(553, Short.MAX_VALUE))
+                .addContainerGap(622, Short.MAX_VALUE))
         );
 
         hospital.addTab("Add Hospital", addHos);
@@ -501,7 +508,7 @@ public class Additions extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addGap(150, 150, 150)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
             .addGroup(editHosLayout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addComponent(jButton6)
@@ -521,7 +528,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
-                .addGap(0, 338, Short.MAX_VALUE))
+                .addGap(0, 407, Short.MAX_VALUE))
         );
 
         hospital.addTab("Edit Hospital", editHos);
@@ -928,7 +935,7 @@ public class Additions extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -944,7 +951,7 @@ public class Additions extends javax.swing.JFrame {
                     .addComponent(jScrollPane5))
                 .addGap(45, 45, 45)
                 .addComponent(jButton8)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         linkDoc.addTab("Link Doctor", jPanel7);
@@ -999,7 +1006,7 @@ public class Additions extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1012,7 +1019,7 @@ public class Additions extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane7)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
                 .addGap(55, 55, 55)
                 .addComponent(jButton9)
                 .addGap(171, 171, 171))
@@ -1022,7 +1029,7 @@ public class Additions extends javax.swing.JFrame {
 
         pnlLayout.add(linkDoc, "linkHos");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        lPTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -1030,7 +1037,7 @@ public class Additions extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Hospital ID", "Hospital Name"
+                "PersonID", "Person Name"
             }
         ) {
             Class[] types = new Class [] {
@@ -1041,9 +1048,14 @@ public class Additions extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        lPTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lPTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(lPTable);
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        lCommTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -1051,7 +1063,7 @@ public class Additions extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Comunity ID", "Hospital Name"
+                "Comunity ID", "Community Name"
             }
         ) {
             Class[] types = new Class [] {
@@ -1062,9 +1074,19 @@ public class Additions extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane8.setViewportView(jTable8);
+        lCommTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lCommTableMouseClicked(evt);
+            }
+        });
+        jScrollPane8.setViewportView(lCommTable);
 
         jButton13.setText("Link");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1073,12 +1095,12 @@ public class Additions extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton13)
-                .addGap(372, 372, 372))
+                .addGap(386, 386, 386))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1087,86 +1109,14 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addGap(56, 56, 56)
                 .addComponent(jButton13)
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addContainerGap(508, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Link Hospital", jPanel4);
+        linkPerson.addTab("Link Person", jPanel4);
 
-        jTable9.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Hospital ID", "Hospital Name"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane9.setViewportView(jTable9);
-
-        jTable10.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Hospital ID", "Hospital Name"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane10.setViewportView(jTable10);
-
-        jButton14.setText("Unlink");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton14)
-                .addGap(372, 372, 372))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(jButton14)
-                .addContainerGap(445, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Unlink Hospital", jPanel5);
-
-        pnlLayout.add(jTabbedPane2, "card7");
+        pnlLayout.add(linkPerson, "linkPerson");
 
         jSplitPane1.setRightComponent(pnlLayout);
 
@@ -1503,6 +1453,47 @@ public class Additions extends javax.swing.JFrame {
         
     }//GEN-LAST:event_perTableMouseClicked
 
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        flag=0;
+        validateLPerson();
+        System.out.println("PERREF"+ perref);
+        if(flag==0){
+        commref = Integer.parseInt((String) lCommTable.getValueAt(lCommTable.getSelectedRow(), NORMAL));
+        personMap.get(perref).setCommunity(perref);
+        System.out.println("Name    "+ personMap.get(perref).getName());
+        
+        System.out.println("Community    "+ personMap.get(200).getCommunity());
+//        communityMap.get(personMap.get(perref).getCommunity()).removePerson(perref);
+//        communityMap.get(commref).addPerson(perref);
+        
+        
+        
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void lPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lPersonActionPerformed
+        // TODO add your handling code here:
+        cards.show(pnlLayout, "linkPerson");
+        setlPTable();
+    }//GEN-LAST:event_lPersonActionPerformed
+
+    private void lPTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lPTableMouseClicked
+        // TODO add your handling code here:
+        perref=Integer.parseInt((String) lPTable.getValueAt(lPTable.getSelectedRow(), NORMAL));
+        System.out.println("perref  " + perref);
+        int x = setlCommTable();
+        lCommTable.setRowSelectionInterval(x, x);
+        
+        
+    }//GEN-LAST:event_lPTableMouseClicked
+
+    private void lCommTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCommTableMouseClicked
+        // TODO add your handling code here:
+        
+        commref=Integer.parseInt((String) lCommTable.getValueAt(lCommTable.getSelectedRow(), NORMAL));
+    }//GEN-LAST:event_lCommTableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1554,7 +1545,6 @@ public class Additions extends javax.swing.JFrame {
     private static javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private static javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1592,12 +1582,10 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1606,22 +1594,20 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSplitPane jSplitPane1;
     private static javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable10;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
-    private javax.swing.JTable jTable9;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable lCommTable;
+    private javax.swing.JTable lPTable;
+    private javax.swing.JButton lPerson;
     private javax.swing.JTabbedPane linkDoc;
+    private javax.swing.JTabbedPane linkPerson;
     private javax.swing.JComboBox<String> mcCity;
     private javax.swing.JTextField mcName;
     private javax.swing.JTextField mcZip;
@@ -1803,6 +1789,60 @@ public class Additions extends javax.swing.JFrame {
         mpName.setText("");
         mpAge.setText("");
         mpHno.setText("");
+        
+    }
+
+    private void setlPTable() {
+                int index = 0;
+        String[][] data = new String[personMap.size()][2];
+        for ( Person temp : personMap.values()){
+        data[index][0]= Integer.toString(temp.getPersonID());
+        data[index][1]= temp.getName();
+        index++;
+        }
+
+        String[] col = {"Person ID", "Person Name"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        lPTable.setModel(model);
+   
+    
+    }
+
+    private int setlCommTable() {
+        int index = 0;
+        int var=0;
+        String[][] data = new String[communityMap.size()][2];
+        for ( Community temp : communityMap.values()){
+            if(temp.getCommunityId()==personMap.get(perref).getCommunity())
+                var=index;
+            
+            if(temp.getCity()== personMap.get(perref).getCity()){
+                data[index][0]= Integer.toString(temp.getCommunityId());
+                data[index][1]= temp.getName();
+                index++;
+            }
+        }
+
+        String[] col = {"Community ID", "Community Name"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        lCommTable.setModel(model);
+        return var;
+   
+ 
+    }
+
+    private void validateLPerson() {
+         try {
+            if (lCommTable.getSelectedRows()== null) {
+                throw new Exception("Community Link not selected");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Select Community to Link");
+            flag = 1;
+        }
+        
         
     }
 }
