@@ -62,6 +62,24 @@ public class Community {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
+    
+    public void addPerson(int personId){
+        persons.add(personId);
+        System.out.println("Data Added");
+        
+                System.out.println(personId + "Added");
+    
+    }
+    public void removePerson(int personId){
+        List<Integer> tempList = new ArrayList<>();
+        for(int i : persons)
+            if(i!=personId)
+                tempList.add(i);
+        persons = tempList;
+
+    }
+    
+    
 
 
 

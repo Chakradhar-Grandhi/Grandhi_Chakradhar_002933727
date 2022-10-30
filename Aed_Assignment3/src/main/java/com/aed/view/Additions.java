@@ -7,7 +7,9 @@ package com.aed.view;
 import com.aed.model.Community;
 import com.aed.model.Person;
 import java.awt.CardLayout;
+import java.time.Clock;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -22,9 +24,10 @@ import javax.swing.table.DefaultTableModel;
  * @author just_chakri
  */
 public class Additions extends javax.swing.JFrame {
-    int communityId = 100,commref=0,flag=0;
+    int communityId = 100,personId=200,commref=0,flag=0,perref=0;
     HashMap<Integer,Community> communityMap = new HashMap<>();
     HashMap<Integer,Person> personMap = new HashMap<>();
+    
     
     
 
@@ -40,10 +43,17 @@ public class Additions extends javax.swing.JFrame {
         initComponents();
         
      cards = (CardLayout)( pnlLayout.getLayout() );
-     //Data Addition
+     // Community Data Addition
      communityMap.put(communityId, new Community(communityId++,"Alphonsus St", "Boston","02120"));
      communityMap.put(communityId, new Community(communityId++,"Huntington Ave", "Boston","02122"));
-     communityMap.put(communityId, new Community(communityId++,"Roxbury Crossing", "Boston","02123"));
+     communityMap.put(communityId, new Community(communityId++,"Rivery", "New York","02123"));
+     
+     //Person Data Addition
+     personMap.put(personId, new Person(personId, "Chakradhar",Integer.toString(personId++),"1234","SA",23,"Male","xyz",75,"Boston",100));  
+     personMap.put(personId, new Person(personId, "Rakshit",Integer.toString(personId++),"1234","CA",25,"Male","xyz",75,"Boston",100));     
+     personMap.put(personId, new Person(personId, "Palak",Integer.toString(personId++),"1234","Doctor",21,"Female","xyz",881,"New York",102));        
+
+
     }
     
 
@@ -57,6 +67,7 @@ public class Additions extends javax.swing.JFrame {
     private void initComponents() {
 
         pGender = new javax.swing.ButtonGroup();
+        mpGender = new javax.swing.ButtonGroup();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -119,6 +130,27 @@ public class Additions extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         pSubmit = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
+        mpName = new javax.swing.JTextField();
+        mpAge = new javax.swing.JTextField();
+        mpMale = new javax.swing.JRadioButton();
+        mpFemale = new javax.swing.JRadioButton();
+        mpRole = new javax.swing.JComboBox<>();
+        mpCity = new javax.swing.JComboBox<>();
+        mpHno = new javax.swing.JTextField();
+        pUpload1 = new javax.swing.JButton();
+        pEdit = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        perTable = new javax.swing.JTable();
+        jButton12 = new javax.swing.JButton();
+        mpComm = new javax.swing.JComboBox<>();
         linkDoc = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -496,6 +528,12 @@ public class Additions extends javax.swing.JFrame {
 
         pnlLayout.add(hospital, "Hospital");
 
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
+
         pName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pNameActionPerformed(evt);
@@ -504,9 +542,19 @@ public class Additions extends javax.swing.JFrame {
 
         pGender.add(pMale);
         pMale.setText("Male");
+        pMale.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pMaleMouseClicked(evt);
+            }
+        });
 
         pGender.add(pFemale);
         pFemale.setText("Female");
+        pFemale.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pFemaleMouseClicked(evt);
+            }
+        });
 
         pRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SA", "CA", "HA", "Doctor", "Person" }));
         pRole.addActionListener(new java.awt.event.ActionListener() {
@@ -516,6 +564,11 @@ public class Additions extends javax.swing.JFrame {
         });
 
         pCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "New York", "California" }));
+        pCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pCityActionPerformed(evt);
+            }
+        });
 
         pUpload.setText("Upload ");
 
@@ -531,7 +584,11 @@ public class Additions extends javax.swing.JFrame {
 
         jLabel17.setText("Community");
 
-        pComm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pComm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pCommActionPerformed(evt);
+            }
+        });
 
         jLabel18.setText("House Number");
 
@@ -571,14 +628,14 @@ public class Additions extends javax.swing.JFrame {
                                     .addGap(34, 34, 34)
                                     .addComponent(pFemale))
                                 .addComponent(pAge, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
-                                .addComponent(pName)
-                                .addComponent(pRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(pName))
+                            .addComponent(pRole, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pCity, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pComm, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(277, 277, 277)
                         .addComponent(pSubmit)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,17 +654,17 @@ public class Additions extends javax.swing.JFrame {
                     .addComponent(pFemale)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(pRole, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(pCity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(pComm, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pHno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -623,15 +680,184 @@ public class Additions extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Add Person", jPanel9);
 
+        mpName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mpNameActionPerformed(evt);
+            }
+        });
+
+        mpGender.add(mpMale);
+        mpMale.setText("Male");
+        mpMale.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mpMaleMouseClicked(evt);
+            }
+        });
+
+        mpGender.add(mpFemale);
+        mpFemale.setText("Female");
+        mpFemale.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mpFemaleMouseClicked(evt);
+            }
+        });
+
+        mpRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SA", "CA", "HA", "Doctor", "Person" }));
+        mpRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mpRoleActionPerformed(evt);
+            }
+        });
+
+        mpCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "New York", "California" }));
+        mpCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mpCityActionPerformed(evt);
+            }
+        });
+
+        pUpload1.setText("Upload ");
+
+        pEdit.setText("Edit");
+        pEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pEditActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Upload Pic");
+
+        jLabel21.setText("House Number");
+
+        jLabel22.setText("Community");
+
+        jLabel23.setText("City");
+
+        jLabel24.setText("Role");
+
+        jLabel25.setText("Gender");
+
+        jLabel26.setText("Age");
+
+        jLabel27.setText("Name");
+
+        perTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Person Id", "Name", "Age", "Gender", "Role", "City", "Community", "House Number"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        perTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                perTableMouseClicked(evt);
+            }
+        });
+        jScrollPane11.setViewportView(perTable);
+
+        jButton12.setText("Delete");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel26)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel20))
+                        .addGap(82, 82, 82)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pUpload1)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(mpMale)
+                                .addGap(18, 18, 18)
+                                .addComponent(mpFemale))
+                            .addComponent(mpName, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                            .addComponent(mpHno)
+                            .addComponent(mpAge)
+                            .addComponent(mpComm, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(mpRole, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mpCity, javax.swing.GroupLayout.Alignment.LEADING, 0, 134, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(pEdit)
+                        .addGap(252, 252, 252)
+                        .addComponent(jButton12)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 764, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(162, 162, 162)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel27)
+                    .addComponent(mpName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel26)
+                    .addComponent(mpAge, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel25)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(mpMale)
+                        .addComponent(mpFemale)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel24))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mpRole)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel23))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mpCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(mpComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel21)
+                    .addComponent(mpHno, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pUpload1)
+                    .addComponent(jLabel20))
+                .addGap(56, 56, 56)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pEdit)
+                    .addComponent(jButton12))
+                .addGap(79, 79, 79))
         );
 
         jTabbedPane1.addTab("Modify Person Details", jPanel10);
@@ -825,7 +1051,7 @@ public class Additions extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Hospital ID", "Hospital Name"
+                "Comunity ID", "Hospital Name"
             }
         ) {
             Class[] types = new Class [] {
@@ -981,10 +1207,16 @@ public class Additions extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
+            
         cards.show(pnlLayout, "Person");
-        jPanel9.setVisible(false);
-        jPanel10.setVisible(true);
+        pComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(pCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+                pComm.addItem(communityMap.get(i).getName());
+            
+        }
+        
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -997,7 +1229,7 @@ public class Additions extends javax.swing.JFrame {
     }//GEN-LAST:event_cComboActionPerformed
     public void showCommTable(){
         int index = 0;
-        String[][] data = new String[communityMap.size()][10];
+        String[][] data = new String[communityMap.size()][4];
         for (Integer k : communityMap.keySet()){
         data[index][0]= Integer.toString(communityMap.get(k).getCommunityId());
         data[index][1]= communityMap.get(k).getName();
@@ -1006,7 +1238,7 @@ public class Additions extends javax.swing.JFrame {
         index++;
         }
 
-        String[] col = {"Name", "City", "ZipCode"};
+        String[] col = {"Community Id", "Name", "City","ZipCode"};
 
         DefaultTableModel model = new DefaultTableModel(data, col);
         commTable.setModel(model);
@@ -1065,26 +1297,211 @@ public class Additions extends javax.swing.JFrame {
     private void pSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pSubmitActionPerformed
         // TODO add your handling code here:
                 flag=0;
+                
         
          try {
-            ValidateCommData();
+            ValidatePerData();
         } catch (Exception ex) {
             Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
         }
-         if(flag ==0){
-            communityMap.put(communityId, new Community(communityId++,cName.getText(), (String) cCombo.getSelectedItem(),cZip.getText()));
-            System.out.println(communityMap.get(communityId-1).getCity());
-            System.out.println(communityMap.get(communityId-1).getName());
+        if(flag ==0){
+            int temp=0;
+            for(Community comm : communityMap.values()){
+                if(comm.getName() == (String) pComm.getSelectedItem()){
+                    temp = comm.getCommunityId();
+                    break;
+                }
+            }
              
-            resetCommData();
+            personMap.put(personId, new Person(personId, pName.getText(),Integer.toString(personId),"1234",(String) pRole.getSelectedItem(),Integer.valueOf(pAge.getText()),pGender.getSelection().getActionCommand(),"xyz",Integer.parseInt(pHno.getText()),(String) pCity.getSelectedItem(),temp));
+
+             
+            resetPerData();
             
             JOptionPane.showMessageDialog(this, "Data Entered");
+            for(Community i : communityMap.values()){
+                //System.out.println("Going inside");
+                if(i.getName()== (String)pComm.getSelectedItem()){
+                    i.addPerson(personId++);
+                    //System.out.println("Added Person");
+                }
+                //System.out.println(i.xyz());
+            }
+            
             
          }
         
         
         
     }//GEN-LAST:event_pSubmitActionPerformed
+
+    private void pCommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pCommActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_pCommActionPerformed
+
+    private void pCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pCityActionPerformed
+        // TODO add your handling code here:
+                pComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(pCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+                pComm.addItem(communityMap.get(i).getName());
+            
+        }
+    }//GEN-LAST:event_pCityActionPerformed
+
+    private void pMaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pMaleMouseClicked
+        // TODO add your handling code here:
+        pMale.setActionCommand("Male");
+    }//GEN-LAST:event_pMaleMouseClicked
+
+    private void pFemaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pFemaleMouseClicked
+        // TODO add your handling code here:
+        pFemale.setActionCommand("Female");
+    }//GEN-LAST:event_pFemaleMouseClicked
+
+    private void mpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mpNameActionPerformed
+
+    private void mpMaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mpMaleMouseClicked
+        // TODO add your handling code here:
+        mpMale.setActionCommand("Male");
+    }//GEN-LAST:event_mpMaleMouseClicked
+
+    private void mpFemaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mpFemaleMouseClicked
+        // TODO add your handling code here:
+        mpFemale.setActionCommand("Female");
+    }//GEN-LAST:event_mpFemaleMouseClicked
+
+    private void mpRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mpRoleActionPerformed
+
+    private void mpCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mpCityActionPerformed
+        // TODO add your handling code here:
+        mpComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(mpCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+                mpComm.addItem(communityMap.get(i).getName());
+        }
+    }//GEN-LAST:event_mpCityActionPerformed
+
+    private void pEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pEditActionPerformed
+        // TODO add your handling code here:
+                        flag=0;
+                
+        
+         try {
+            ValidateMPerData();
+        } catch (Exception ex) {
+            Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flag ==0){
+            int temp=0,personflag=Integer.parseInt((String) perTable.getValueAt(perTable.getSelectedRow(), NORMAL));
+            for(Community comm : communityMap.values()){
+                if(comm.getName() == (String) mpComm.getSelectedItem()){
+                    
+                    temp = comm.getCommunityId();
+                    break;
+                }
+            }
+                System.out.println(temp + "Community ID");
+                
+                
+            
+            communityMap.get(personMap.get(personflag).getCommunity()).removePerson(personflag);
+            
+            for(Person i : personMap.values()){
+                if(i.getPersonID() == personflag){
+                i.setName(mpName.getText());
+                i.setAge(Integer.parseInt(mpAge.getText()));
+                i.setGender(mpGender.getSelection().getActionCommand());
+                i.setRole((String) mpRole.getSelectedItem());
+                i.setCity((String)mpCity.getSelectedItem());
+                i.setCommunity(temp);
+                }
+            }
+             
+            resetMPerData();
+            
+            JOptionPane.showMessageDialog(this, "Data Edited");
+            for(Community i : communityMap.values()){
+                //System.out.println("Going inside");
+                if(i.getName()== (String)mpComm.getSelectedItem()){
+                    i.addPerson(personflag);
+                    //System.out.println("Added Person");
+                }
+                //System.out.println(i.xyz());
+            }
+            
+            
+            showPerTable();
+         }
+        
+    }//GEN-LAST:event_pEditActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        showPerTable();
+                mpComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(mpCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+                mpComm.addItem(communityMap.get(i).getName());
+            
+        }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void perTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_perTableMouseClicked
+        // TODO add your handling code here:
+        int tempID = Integer.parseInt(perTable.getValueAt(perTable.getSelectedRow(), NORMAL).toString());
+        System.out.println(tempID);
+        
+        String tempCity = (String) perTable.getValueAt(perTable.getSelectedRow(),5 );
+        String tempRole = (String) perTable.getValueAt(perTable.getSelectedRow(),4);
+        System.out.println(tempCity);
+        mpName.setText(personMap.get(tempID).getName());
+        mpAge.setText(Integer.toString(personMap.get(tempID).getAge()));
+        if((String) perTable.getValueAt(perTable.getSelectedRow(),3)=="Male"){
+            mpMale.setSelected(true);
+            mpMale.setActionCommand("Male");
+        }
+        else{
+            mpFemale.setSelected(true);
+            mpFemale.setActionCommand("Male");
+        }
+        
+        int tempSize = mpCity.getItemCount();
+        for(int i=0;i<tempSize;i++){
+            if(mpCity.getItemAt(i).toString() == tempCity){
+                mpCity.setSelectedIndex(i);
+            }
+        }
+        tempSize = mpRole.getItemCount();
+        for(int i=0;i<tempSize;i++){
+            if(mpRole.getItemAt(i).toString() == tempRole){
+                mpRole.setSelectedIndex(i);
+            }
+        }
+        
+        
+        mpComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(tempCity== communityMap.get(i).getCity())
+                mpComm.addItem(communityMap.get(i).getName());
+        }
+        for(int i=0; i< mpComm.getItemCount();i++){
+            if((String)mpComm.getItemAt(i)== communityMap.get(personMap.get(tempID).getCommunity()).getName()){
+                mpComm.setSelectedIndex(i);
+                break;
+            }
+                
+        }
+        mpHno.setText(Integer.toString(personMap.get(tempID).getHno()));
+        
+        
+        
+    }//GEN-LAST:event_perTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1135,6 +1552,7 @@ public class Additions extends javax.swing.JFrame {
     private static javax.swing.JButton jButton1;
     private static javax.swing.JButton jButton10;
     private static javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private static javax.swing.JButton jButton2;
@@ -1157,6 +1575,14 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1172,6 +1598,7 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1198,9 +1625,19 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> mcCity;
     private javax.swing.JTextField mcName;
     private javax.swing.JTextField mcZip;
+    private javax.swing.JTextField mpAge;
+    private javax.swing.JComboBox<String> mpCity;
+    private javax.swing.JComboBox<String> mpComm;
+    private javax.swing.JRadioButton mpFemale;
+    private javax.swing.ButtonGroup mpGender;
+    private javax.swing.JTextField mpHno;
+    private javax.swing.JRadioButton mpMale;
+    private javax.swing.JTextField mpName;
+    private javax.swing.JComboBox<String> mpRole;
     private javax.swing.JTextField pAge;
     private javax.swing.JComboBox<String> pCity;
     private javax.swing.JComboBox<String> pComm;
+    private javax.swing.JButton pEdit;
     private javax.swing.JRadioButton pFemale;
     private javax.swing.ButtonGroup pGender;
     private javax.swing.JTextField pHno;
@@ -1209,6 +1646,8 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> pRole;
     private javax.swing.JButton pSubmit;
     private javax.swing.JButton pUpload;
+    private javax.swing.JButton pUpload1;
+    private javax.swing.JTable perTable;
     private javax.swing.JPanel person;
     private javax.swing.JPanel pnlLayout;
     // End of variables declaration//GEN-END:variables
@@ -1241,5 +1680,129 @@ public class Additions extends javax.swing.JFrame {
 
         
      
+    }
+
+    private void ValidatePerData() {
+                try {
+            if (pName.getText().equals("")) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please enter name");
+            flag = 1;
+        }
+        
+
+        if (flag == 0) {
+            try {
+                if (pAge.getText().equals("") || !Pattern.matches("[1-9]{1}[0-9]{1}", pAge.getText())) {
+                    throw new Exception("Incorrect age");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Please enter Valid Age");
+                flag = 1;
+            }
+        }
+        if (flag == 0) {
+            try {
+                String gen;
+                if(pMale.isSelected()==false && pFemale.isSelected()==false)
+                    throw new Exception("Gender not selected");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gender not selected");
+                
+                flag = 1;
+            }
+        }
+        if(flag==0){
+            try {
+                if (pHno.getText().equals("")) {
+                    throw new Exception("House no not entered");
+                }
+            } catch (Exception e) { //exception handling
+                JOptionPane.showMessageDialog(this, "Please enter House no");
+                flag = 1;
+            }
+        }
+    }
+
+    private void resetPerData() {
+        pName.setText("");
+        pAge.setText("");
+        pHno.setText("");
+    }
+
+    private void showPerTable() {
+        int index = 0;
+        String[][] data = new String[personMap.size()][8];
+        for ( Person temp : personMap.values()){
+        data[index][0]= Integer.toString(temp.getPersonID());
+        data[index][1]= temp.getName();
+        data[index][2]= Integer.toString(temp.getAge());
+        data[index][3]=temp.getGender();
+        data[index][4]= temp.getRole();
+        data[index][5]=temp.getCity();
+        data[index][6]= communityMap.get(temp.getCommunity()).getName();
+        data[index][7]= Integer.toString(temp.getHno());
+        index++;
+        }
+
+        String[] col = {"Person Id", "Name", "Age","Gender","Role", "City","Community","House Number"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        perTable.setModel(model);
+    }
+
+    private void ValidateMPerData() {
+        try {
+            if (mpName.getText().equals("")) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please enter name");
+            flag = 1;
+        }
+        
+
+        if (flag == 0) {
+            try {
+                if (mpAge.getText().equals("") || !Pattern.matches("[1-9]{1}[0-9]{1}", mpAge.getText())) {
+                    throw new Exception("Incorrect age");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Please enter Valid Age");
+                flag = 1;
+            }
+        }
+        if (flag == 0) {
+            try {
+                String gen;
+                if(mpMale.isSelected()==false && mpFemale.isSelected()==false)
+                    throw new Exception("Gender not selected");
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gender not selected");
+                
+                flag = 1;
+            }
+        }
+        if(flag==0){
+            try {
+                if (mpHno.getText().equals("")) {
+                    throw new Exception("House no not entered");
+                }
+            } catch (Exception e) { //exception handling
+                JOptionPane.showMessageDialog(this, "Please enter House no");
+                flag = 1;
+            }
+        }
+    }
+
+    private void resetMPerData() {
+        mpName.setText("");
+        mpAge.setText("");
+        mpHno.setText("");
+        
     }
 }

@@ -17,9 +17,9 @@ public class Person {
     private String gender;
     private String photo;
     private String city;
-    private String community;
+    private int community;
 
-    public Person(int personID, String name, String userName, String password, String role, int age, String gender, String photo, int hno, String city, String community) {
+    public Person(int personID, String name, String userName, String password, String role, int age, String gender, String photo, int hno, String city, int community) {
         this.personID = personID;
         this.name = name;
         this.userName = userName;
@@ -32,11 +32,11 @@ public class Person {
         this.city = city;
         this.community = community;
     }
-    public String getCommunity(){
+    public int getCommunity(){
         return community;
         
     }
-    public void setCommunity(String community) {
+    public void setCommunity(int community) {
         this.community = community;
     }
 
