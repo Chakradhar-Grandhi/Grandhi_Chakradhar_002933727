@@ -15,6 +15,7 @@ public class Aed_Assignment3 {
 
     public static void main(String[] args) {
         
+        
         new Additions().setVisible(true);
     }
 }

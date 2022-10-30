@@ -11,6 +11,7 @@ import java.util.List;
  * @author Chakradhar Grandhi
  */
 public class Doctor {
+    
 
     private int docterId;
     private String name;

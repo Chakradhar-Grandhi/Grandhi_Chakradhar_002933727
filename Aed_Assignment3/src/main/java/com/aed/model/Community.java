@@ -4,6 +4,7 @@
  */
 package com.aed.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,16 @@ public class Community {
     private String name;
     private String city;
     private String zipcode;
-    private List<Hospital> hospitals;
+    List<Integer> persons = new ArrayList<>();
+
+    public Community(int communityId, String name, String city, String zipcode) {
+        this.communityId = communityId;
+        this.name = name;
+        this.city = city;
+        this.zipcode = zipcode;
+    }
+    
+    
 
     public int getCommunityId() {
         return communityId;
@@ -53,12 +63,6 @@ public class Community {
         this.zipcode = zipcode;
     }
 
-    public List<Hospital> getHospitals() {
-        return hospitals;
-    }
 
-    public void setHospitals(List<Hospital> hospitals) {
-        this.hospitals = hospitals;
-    }
 
 }

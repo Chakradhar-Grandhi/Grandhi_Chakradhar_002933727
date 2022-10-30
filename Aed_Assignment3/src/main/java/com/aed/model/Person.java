@@ -13,24 +13,24 @@ public class Person {
     private String password;
     private String role;
     private int age;
+    private int hno;
     private String gender;
     private String photo;
-    private int houseID;
     private String city;
     private String community;
 
-    public Person(int personID, String name, String userName, String password, String role, int age, String gender, String photo, int houseID, String city, String community) {
+    public Person(int personID, String name, String userName, String password, String role, int age, String gender, String photo, int hno, String city, String community) {
         this.personID = personID;
         this.name = name;
         this.userName = userName;
         this.password = password;
         this.role = role;
+        this.hno = hno;
         this.age = age;
         this.gender = gender;
         this.photo = photo;
-        this.houseID = houseID;
         this.city = city;
-        this.community = "";
+        this.community = community;
     }
     public String getCommunity(){
         return community;
@@ -104,13 +104,7 @@ public class Person {
         this.photo = photo;
     }
 
-    public int getHouseID() {
-        return houseID;
-    }
 
-    public void setHouseID(int houseID) {
-        this.houseID = houseID;
-    }
 
     public String getCity() {
         return city;
@@ -119,4 +113,11 @@ public class Person {
     public void setCity(String city) {
         this.city = city;
     }
+    public int getHno() {
+        return hno;
+    }
+    public void setHno(int hno) {
+        this.hno= hno;
+    }
+      
 }
