@@ -1457,15 +1457,13 @@ public class Additions extends javax.swing.JFrame {
         // TODO add your handling code here:
         flag=0;
         validateLPerson();
-        System.out.println("PERREF"+ perref);
+        System.out.println("PERREF in link "+ perref);
         if(flag==0){
         commref = Integer.parseInt((String) lCommTable.getValueAt(lCommTable.getSelectedRow(), NORMAL));
-        personMap.get(perref).setCommunity(perref);
-        System.out.println("Name    "+ personMap.get(perref).getName());
+        personMap.get(perref).setCommunity(commref);
         
-        System.out.println("Community    "+ personMap.get(200).getCommunity());
-//        communityMap.get(personMap.get(perref).getCommunity()).removePerson(perref);
-//        communityMap.get(commref).addPerson(perref);
+        communityMap.get(personMap.get(perref).getCommunity()).removePerson(perref);
+        communityMap.get(commref).addPerson(perref);
         
         
         
@@ -1481,7 +1479,9 @@ public class Additions extends javax.swing.JFrame {
     private void lPTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lPTableMouseClicked
         // TODO add your handling code here:
         perref=Integer.parseInt((String) lPTable.getValueAt(lPTable.getSelectedRow(), NORMAL));
-        System.out.println("perref  " + perref);
+        
+        System.out.println("PERREF in link Click" + perref);
+        System.out.println("Community in personClick   "+ personMap.get(perref).getCommunity());
         int x = setlCommTable();
         lCommTable.setRowSelectionInterval(x, x);
         
