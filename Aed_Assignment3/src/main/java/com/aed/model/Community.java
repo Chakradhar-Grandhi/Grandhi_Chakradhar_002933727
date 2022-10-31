@@ -19,6 +19,7 @@ public class Community {
     private String city;
     private String zipcode;
     List<Integer> persons = new ArrayList<>();
+    List<Integer> hospitals = new ArrayList<>();
 
     public Community(int communityId, String name, String city, String zipcode) {
         this.communityId = communityId;
@@ -67,7 +68,7 @@ public class Community {
         persons.add(personId);
         System.out.println("Data Added");
         
-                System.out.println(personId + "Added");
+                System.out.println(personId + "  Person Added");
     
     }
     public void removePerson(int personId){
@@ -77,6 +78,41 @@ public class Community {
                 tempList.add(i);
         persons = tempList;
 
+    }
+    public void addHospital(int hospitalId){
+        hospitals.add(hospitalId);
+        System.out.println("Data Added");
+        
+                System.out.println(hospitalId + "  Hospital Added");
+    
+    }
+    
+    public void removeHospital(int hospitalId){
+        List<Integer> tempList = new ArrayList<>();
+        for(int i : hospitals)
+            if(i!=hospitalId)
+                tempList.add(i);
+        hospitals = tempList;
+    }
+    
+    public boolean hospitalExists(int hospitalId){
+        int flag = 0;
+        for (int i :hospitals){
+            if(i==hospitalId){
+                flag=1;
+            }
+        }
+        if(flag==1){
+            return true;
+        }
+        return false;
+    }
+    
+    public int hospitalLength(){
+    return hospitals.size();
+    }
+    public int personLength(){
+    return persons.size();
     }
     
     

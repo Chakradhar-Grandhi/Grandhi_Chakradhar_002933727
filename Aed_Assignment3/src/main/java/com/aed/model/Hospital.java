@@ -16,8 +16,18 @@ public class Hospital {
     private int hospitalId;
     private String name;
     private String city;
-    private String community;
+    private int community;
     private List<Doctor> doctors;
+
+    public Hospital(int hospitalId, String name, String city, int community) {
+        this.hospitalId = hospitalId;
+        this.name = name;
+        this.city = city;
+        this.community = community;
+    }
+    
+    
+    
 
     public int getHospitalId() {
         return hospitalId;
@@ -43,11 +53,11 @@ public class Hospital {
         this.city = city;
     }
 
-    public String getCommunity() {
+    public int getCommunity() {
         return community;
     }
 
-    public void setCommunity(String community) {
+    public void setCommunity(int community) {
         this.community = community;
     }
 

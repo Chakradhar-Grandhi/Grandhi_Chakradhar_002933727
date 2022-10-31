@@ -5,6 +5,7 @@
 package com.aed.view;
 
 import com.aed.model.Community;
+import com.aed.model.Hospital;
 import com.aed.model.Person;
 import java.awt.CardLayout;
 import java.time.Clock;
@@ -24,10 +25,11 @@ import javax.swing.table.DefaultTableModel;
  * @author just_chakri
  */
 public class Additions extends javax.swing.JFrame {
-    int communityId = 100,personId=200,commref=0,flag=0,perref=0;
+    int communityId = 100,personId=200,hospitalId=300,commref=0,flag=0,perref=0,hosref;
     String role = "SA";
     HashMap<Integer,Community> communityMap = new HashMap<>();
     HashMap<Integer,Person> personMap = new HashMap<>();
+    HashMap<Integer,Hospital> hospitalMap = new HashMap<>();
     
     
     
@@ -76,6 +78,7 @@ public class Additions extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         lPerson = new javax.swing.JButton();
+        lHospital = new javax.swing.JButton();
         pnlLayout = new javax.swing.JPanel();
         AddDoctor = new javax.swing.JPanel();
         community = new javax.swing.JTabbedPane();
@@ -100,16 +103,24 @@ public class Additions extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         hospital = new javax.swing.JTabbedPane();
         addHos = new javax.swing.JPanel();
-        jTextField6 = new javax.swing.JTextField();
+        hName = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        hCity = new javax.swing.JComboBox<>();
+        hComm = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         editHos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jTextField7 = new javax.swing.JTextField();
+        hosTable = new javax.swing.JTable();
+        mhName = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        hEdit = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        mhCity = new javax.swing.JComboBox<>();
+        mhComm = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         person = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
@@ -173,6 +184,20 @@ public class Additions extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         lCommTable = new javax.swing.JTable();
         jButton13 = new javax.swing.JButton();
+        linkHospital = new javax.swing.JTabbedPane();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        lHosTable = new javax.swing.JTable();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        lHoscommTable = new javax.swing.JTable();
+        hosLink = new javax.swing.JButton();
+        hosUnlink = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jTable10 = new javax.swing.JTable();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        jTable11 = new javax.swing.JTable();
+        jButton15 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -211,6 +236,13 @@ public class Additions extends javax.swing.JFrame {
             }
         });
 
+        lHospital.setText("Link Hospital");
+        lHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lHospitalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -218,13 +250,15 @@ public class Additions extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(152, Short.MAX_VALUE))
+                        .addComponent(lPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +273,9 @@ public class Additions extends javax.swing.JFrame {
                 .addComponent(jButton11)
                 .addGap(36, 36, 36)
                 .addComponent(lPerson)
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(lHospital)
+                .addContainerGap(366, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -372,6 +408,11 @@ public class Additions extends javax.swing.JFrame {
         jLabel6.setText("Zip Code");
 
         jButton3.setText("Edit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Delete");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -437,9 +478,31 @@ public class Additions extends javax.swing.JFrame {
 
         pnlLayout.add(community, "Community");
 
+        hospital.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hospitalMouseClicked(evt);
+            }
+        });
+
         jLabel10.setText("Name");
 
         jButton5.setText("Add");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        hCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "New York", "California" }));
+        hCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hCityActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("City");
+
+        jLabel8.setText("Community");
 
         javax.swing.GroupLayout addHosLayout = new javax.swing.GroupLayout(addHos);
         addHos.setLayout(addHosLayout);
@@ -448,55 +511,94 @@ public class Additions extends javax.swing.JFrame {
             .addGroup(addHosLayout.createSequentialGroup()
                 .addGroup(addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addHosLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel10)
-                        .addGap(103, 103, 103)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(addHosLayout.createSequentialGroup()
                         .addGap(266, 266, 266)
-                        .addComponent(jButton5)))
-                .addContainerGap(287, Short.MAX_VALUE))
+                        .addComponent(jButton5))
+                    .addGroup(addHosLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(95, 95, 95)
+                        .addGroup(addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(hName, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(addHosLayout.createSequentialGroup()
+                                .addComponent(hCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(268, 268, 268))
+                            .addComponent(hComm, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         addHosLayout.setVerticalGroup(
             addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addHosLayout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addGroup(addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(79, 79, 79)
+                .addGap(18, 18, 18)
+                .addGroup(addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(hCity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(30, 30, 30)
                 .addComponent(jButton5)
-                .addContainerGap(622, Short.MAX_VALUE))
+                .addContainerGap(589, Short.MAX_VALUE))
         );
 
         hospital.addTab("Add Hospital", addHos);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        hosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name"
+                "Hospital ID", "Hospital Name", "City", "Community"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        hosTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hosTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(hosTable);
 
         jLabel11.setText("Name");
 
-        jButton6.setText("Edit");
+        hEdit.setText("Edit");
+        hEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hEditActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Delete");
+
+        mhCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "New York", "California" }));
+        mhCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mhCityActionPerformed(evt);
+            }
+        });
+
+        mhComm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel9.setText("City");
+
+        jLabel28.setText("Community");
 
         javax.swing.GroupLayout editHosLayout = new javax.swing.GroupLayout(editHos);
         editHos.setLayout(editHosLayout);
@@ -504,17 +606,24 @@ public class Additions extends javax.swing.JFrame {
             editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3)
             .addGroup(editHosLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel11)
-                .addGap(150, 150, 150)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(263, Short.MAX_VALUE))
-            .addGroup(editHosLayout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jButton6)
+                .addGap(154, 154, 154)
+                .addComponent(hEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton7)
-                .addGap(177, 177, 177))
+                .addGap(184, 184, 184))
+            .addGroup(editHosLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel28))
+                .addGap(135, 135, 135)
+                .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mhName, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(mhComm, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mhCity, javax.swing.GroupLayout.Alignment.LEADING, 0, 143, Short.MAX_VALUE)))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         editHosLayout.setVerticalGroup(
             editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -522,13 +631,21 @@ public class Additions extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
                 .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mhName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addGap(64, 64, 64)
+                .addGap(27, 27, 27)
+                .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(mhCity, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
+                    .addComponent(mhComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28))
+                .addGap(44, 44, 44)
+                .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hEdit)
                     .addComponent(jButton7))
-                .addGap(0, 407, Short.MAX_VALUE))
+                .addGap(0, 336, Short.MAX_VALUE))
         );
 
         hospital.addTab("Edit Hospital", editHos);
@@ -1027,7 +1144,7 @@ public class Additions extends javax.swing.JFrame {
 
         linkDoc.addTab("Unlink Doctor", jPanel8);
 
-        pnlLayout.add(linkDoc, "linkHos");
+        pnlLayout.add(linkDoc, "linkDoctor");
 
         lPTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1118,6 +1235,189 @@ public class Additions extends javax.swing.JFrame {
 
         pnlLayout.add(linkPerson, "linkPerson");
 
+        linkHospital.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                linkHospitalMouseClicked(evt);
+            }
+        });
+
+        lHosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Hospital ID", "Hospital Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        lHosTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lHosTableMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(lHosTable);
+
+        lHoscommTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Community ID", "Community Name", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        lHoscommTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lHoscommTableMouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(lHoscommTable);
+
+        hosLink.setText("Link");
+        hosLink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hosLinkActionPerformed(evt);
+            }
+        });
+
+        hosUnlink.setText("Unlink");
+        hosUnlink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hosUnlinkActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(304, 304, 304)
+                .addComponent(hosLink)
+                .addGap(100, 100, 100)
+                .addComponent(hosUnlink)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                    .addComponent(jScrollPane10))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hosLink)
+                    .addComponent(hosUnlink))
+                .addContainerGap(283, Short.MAX_VALUE))
+        );
+
+        linkHospital.addTab("Link Hospital", jPanel11);
+
+        jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel12MouseClicked(evt);
+            }
+        });
+
+        jTable10.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Hospital Id", "Hospital Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane12.setViewportView(jTable10);
+
+        jTable11.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Community ID", "Community Name", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane13.setViewportView(jTable11);
+
+        jButton15.setText("Unlink");
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton15)
+                .addGap(344, 344, 344))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane13)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jButton15)
+                .addGap(171, 171, 171))
+        );
+
+        linkHospital.addTab("Unlink Hospital", jPanel12);
+
+        pnlLayout.add(linkHospital, "linkHospital");
+        linkHospital.getAccessibleContext().setAccessibleName("Link Hospital");
+
         jSplitPane1.setRightComponent(pnlLayout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1146,6 +1446,12 @@ public class Additions extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         cards.show(pnlLayout, "Hospital");
+        hComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(hCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+                hComm.addItem(communityMap.get(i).getName());
+            
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNameActionPerformed
@@ -1222,16 +1528,18 @@ public class Additions extends javax.swing.JFrame {
     
     private void commTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_commTableMouseClicked
         // TODO add your handling code here:
-        int tempID = Integer.parseInt(commTable.getValueAt(commTable.getSelectedRow(), NORMAL).toString()),cind=2;
+        commref = Integer.parseInt(commTable.getValueAt(commTable.getSelectedRow(), NORMAL).toString());
+        int cind=2;
         String tempCity = (String) commTable.getValueAt(commTable.getSelectedRow(),cind );
-        mcName.setText(communityMap.get(tempID).getName());
+        mcName.setText(communityMap.get(commref).getName());
         int tempSize = mcCity.getItemCount();
         for(int i=0;i<tempSize;i++){
             if(mcCity.getItemAt(i).toString() == tempCity){
                 mcCity.setSelectedIndex(i);
             }
         }
-        mcZip.setText(communityMap.get(tempID).getZipcode());
+        mcZip.setText(communityMap.get(commref).getZipcode());
+        commref = 0;
         
         
     }//GEN-LAST:event_commTableMouseClicked
@@ -1464,6 +1772,7 @@ public class Additions extends javax.swing.JFrame {
         
         communityMap.get(personMap.get(perref).getCommunity()).removePerson(perref);
         communityMap.get(commref).addPerson(perref);
+        JOptionPane.showMessageDialog(this, " Link Successful");
         
         
         
@@ -1480,8 +1789,8 @@ public class Additions extends javax.swing.JFrame {
         // TODO add your handling code here:
         perref=Integer.parseInt((String) lPTable.getValueAt(lPTable.getSelectedRow(), NORMAL));
         
-        System.out.println("PERREF in link Click" + perref);
-        System.out.println("Community in personClick   "+ personMap.get(perref).getCommunity());
+//        System.out.println("PERREF in link Click" + perref);
+//        System.out.println("Community in personClick   "+ personMap.get(perref).getCommunity());
         int x = setlCommTable();
         lCommTable.setRowSelectionInterval(x, x);
         
@@ -1493,6 +1802,268 @@ public class Additions extends javax.swing.JFrame {
         
         commref=Integer.parseInt((String) lCommTable.getValueAt(lCommTable.getSelectedRow(), NORMAL));
     }//GEN-LAST:event_lCommTableMouseClicked
+
+    private void mhCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mhCityActionPerformed
+        // TODO add your handling code here:
+        mhComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(mhCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+                mhComm.addItem(communityMap.get(i).getName());
+        }
+    }//GEN-LAST:event_mhCityActionPerformed
+
+    private void hCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hCityActionPerformed
+        // TODO add your handling code here:
+                hComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(hCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+                hComm.addItem(communityMap.get(i).getName());
+        }
+    }//GEN-LAST:event_hCityActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+                        flag=0;
+                
+        
+         try {
+            ValidateHosData();
+        } catch (Exception ex) {
+            Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flag ==0){
+            int temp=0;
+            for(Community comm : communityMap.values()){
+                if(comm.getName() == (String) hComm.getSelectedItem()){
+                    temp = comm.getCommunityId();
+                    break;
+                }
+            }
+          System.out.println("Temp in Addition   "+temp);
+          hospitalMap.put(hospitalId, new Hospital(hospitalId,hName.getText(), (String) hCity.getSelectedItem(),temp));
+            for(Community i : communityMap.values()){
+                //System.out.println("Going inside");
+                if(i.getName()== (String)hComm.getSelectedItem()){
+                    i.addHospital(hospitalId++);
+                    System.out.println("Added new Community  "+ hospitalId);
+                }
+                //System.out.println(i.xyz());
+            }
+
+             
+            resetHosData();
+            
+            JOptionPane.showMessageDialog(this, "Data Entered");
+            for(Community i : communityMap.values()){
+                //System.out.println("Going inside");
+                if(i.getName()== (String)pComm.getSelectedItem()){
+                    i.addPerson(personId++);
+                    //System.out.println("Added Person");
+                }
+                //System.out.println(i.xyz());
+            }
+            
+            
+         }
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void hospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hospitalMouseClicked
+        showHosTable();
+                mhComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(mhCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+                mhComm.addItem(communityMap.get(i).getName());
+            
+        }
+        
+        
+    }//GEN-LAST:event_hospitalMouseClicked
+
+    private void hosTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hosTableMouseClicked
+        // TODO add your handling code here:
+                // TODO add your handling code here:
+        int tempID = Integer.parseInt(hosTable.getValueAt(hosTable.getSelectedRow(), NORMAL).toString());
+        System.out.println(tempID);
+        
+        String tempCity = (String) hosTable.getValueAt(hosTable.getSelectedRow(),2 );
+        System.out.println(tempCity);
+        mhName.setText(hospitalMap.get(tempID).getName());
+        
+        int tempSize = mhCity.getItemCount();
+        for(int i=0;i<tempSize;i++){
+            if(mhCity.getItemAt(i).toString() == tempCity){
+                mhCity.setSelectedIndex(i);
+            }
+        }
+        
+        
+        mhComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(tempCity== communityMap.get(i).getCity())
+                mhComm.addItem(communityMap.get(i).getName());
+        }
+        for(int i=0; i< mhComm.getItemCount();i++){
+            if((String)mhComm.getItemAt(i)== communityMap.get(hospitalMap.get(tempID).getCommunity()).getName()){
+                mhComm.setSelectedIndex(i);
+                break;
+            }
+                
+        }
+        
+        
+        
+    }//GEN-LAST:event_hosTableMouseClicked
+
+    private void hEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hEditActionPerformed
+        // TODO add your handling code here:
+            // TODO add your handling code here:
+        flag=0;
+                
+        
+         try {
+            ValidateMHosData();
+        } catch (Exception ex) {
+            Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flag ==0){
+            int temp=0,hospitalflag=Integer.parseInt((String) hosTable.getValueAt(hosTable.getSelectedRow(), NORMAL));
+            for(Community comm : communityMap.values()){
+                if(comm.getName() == (String) mhComm.getSelectedItem()){
+                    
+                    temp = comm.getCommunityId();
+                    System.out.println("Community    "+temp);
+                    break;
+                }
+            }
+            
+                
+                
+            
+            communityMap.get(hospitalMap.get(hospitalflag).getCommunity()).removeHospital(hospitalflag);
+            
+            for(Hospital i : hospitalMap.values()){
+                if(i.getHospitalId()== hospitalflag){
+                i.setName(mhName.getText());
+                i.setCity((String)mhCity.getSelectedItem());
+                i.setCommunity(temp);
+                }
+            }
+             
+            resetMHosData();
+            
+            JOptionPane.showMessageDialog(this, "Data Edited");
+            for(Community i : communityMap.values()){
+                //System.out.println("Going inside");
+                if(i.getName()== (String)mhComm.getSelectedItem()){
+                    i.addHospital(hospitalflag);
+                    System.out.println("Added new Community  "+ hospitalflag);
+                    
+                }
+                //System.out.println(i.xyz());
+            }
+            
+            
+            showHosTable();
+         }
+    
+        
+    }//GEN-LAST:event_hEditActionPerformed
+
+    private void linkHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkHospitalMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_linkHospitalMouseClicked
+
+    private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel12MouseClicked
+
+    private void lHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lHospitalActionPerformed
+        // TODO add your handling code here:
+                cards.show(pnlLayout, "linkHospital");
+        setlHTable();
+    }//GEN-LAST:event_lHospitalActionPerformed
+
+    private void lHosTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lHosTableMouseClicked
+        // TODO add your handling code here:
+        hosref=Integer.parseInt((String) lHosTable.getValueAt(lHosTable.getSelectedRow(), NORMAL));
+        int x = setlHoscommTable();
+    }//GEN-LAST:event_lHosTableMouseClicked
+
+    private void hosLinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hosLinkActionPerformed
+        // TODO add your handling code here:
+         flag=0;
+        validateLHospital();
+        System.out.println("Hosref in link "+ hosref);
+        if(flag==0){
+        commref = Integer.parseInt((String) lHoscommTable.getValueAt(lHoscommTable.getSelectedRow(), NORMAL));
+        //personMap.get(hosref).setCommunity(commref);
+        
+      //communityMap.get(personMap.get(perref).getCommunity()).removePerson(perref);
+        communityMap.get(commref).addHospital(hosref);
+        JOptionPane.showMessageDialog(this, " Link Successful");
+        int x = setlHoscommTable();
+        }
+        
+        
+        
+    }//GEN-LAST:event_hosLinkActionPerformed
+
+    private void hosUnlinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hosUnlinkActionPerformed
+        // TODO add your handling code here:
+        flag=0;
+        validateUnLHospital();
+        System.out.println("Hosref in link "+ hosref);
+        if(flag==0){
+        commref = Integer.parseInt((String) lHoscommTable.getValueAt(lHoscommTable.getSelectedRow(), NORMAL));
+        //personMap.get(hosref).setCommunity(commref);
+        
+        communityMap.get(commref).removeHospital(hosref);
+        //if(hospitalMap.get(hosref).get)
+        //communityMap.get(commref).addHospital(hosref);
+        JOptionPane.showMessageDialog(this, " DeLink Successful");
+        int x = setlHoscommTable();
+        }
+    }//GEN-LAST:event_hosUnlinkActionPerformed
+
+    private void lHoscommTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lHoscommTableMouseClicked
+        // TODO add your handling code here:
+        
+        commref = Integer.parseInt((String) lHoscommTable.getValueAt(lHoscommTable.getSelectedRow(), NORMAL));
+        System.out.println("COMM REF IN LHOSCOM IS " + commref);
+    }//GEN-LAST:event_lHoscommTableMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+                                flag=0;
+                
+        
+         try {
+            ValidateMCommData();
+        } catch (Exception ex) {
+            Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flag ==0){
+            int temp=0,commflag=Integer.parseInt((String) commTable.getValueAt(commTable.getSelectedRow(), NORMAL));
+
+                
+      
+            
+            for(Community i : communityMap.values()){
+                if(i.getCommunityId()== commflag){
+                i.setName(mcName.getText());
+                i.setCity((String)mcCity.getSelectedItem());
+                i.setZipcode(mcZip.getText());
+                }
+            }
+             
+            
+            
+            showCommTable();
+         }
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1539,17 +2110,24 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JTable commTable;
     private javax.swing.JTabbedPane community;
     private static javax.swing.JPanel editHos;
+    private javax.swing.JComboBox<String> hCity;
+    private javax.swing.JComboBox<String> hComm;
+    private javax.swing.JButton hEdit;
+    private javax.swing.JTextField hName;
+    private javax.swing.JButton hosLink;
+    private javax.swing.JTable hosTable;
+    private javax.swing.JButton hosUnlink;
     private javax.swing.JTabbedPane hospital;
     private static javax.swing.JButton jButton1;
     private static javax.swing.JButton jButton10;
     private static javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton15;
     private static javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -1573,12 +2151,18 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1586,7 +2170,10 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1594,23 +2181,30 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSplitPane jSplitPane1;
     private static javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable10;
+    private javax.swing.JTable jTable11;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTable lCommTable;
+    private javax.swing.JTable lHosTable;
+    private javax.swing.JTable lHoscommTable;
+    private javax.swing.JButton lHospital;
     private javax.swing.JTable lPTable;
     private javax.swing.JButton lPerson;
     private javax.swing.JTabbedPane linkDoc;
+    private javax.swing.JTabbedPane linkHospital;
     private javax.swing.JTabbedPane linkPerson;
     private javax.swing.JComboBox<String> mcCity;
     private javax.swing.JTextField mcName;
     private javax.swing.JTextField mcZip;
+    private javax.swing.JComboBox<String> mhCity;
+    private javax.swing.JComboBox<String> mhComm;
+    private javax.swing.JTextField mhName;
     private javax.swing.JTextField mpAge;
     private javax.swing.JComboBox<String> mpCity;
     private javax.swing.JComboBox<String> mpComm;
@@ -1835,7 +2429,7 @@ public class Additions extends javax.swing.JFrame {
 
     private void validateLPerson() {
          try {
-            if (lCommTable.getSelectedRows()== null) {
+            if (Integer.parseInt((String) lCommTable.getValueAt(lCommTable.getSelectedRow(), NORMAL))== -1) {
                 throw new Exception("Community Link not selected");
             }
         } catch (Exception e) { //exception handling
@@ -1845,4 +2439,189 @@ public class Additions extends javax.swing.JFrame {
         
         
     }
+
+    private void ValidateHosData() {
+        
+        try {
+            if (hName.getText().equals("")) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please enter Hospital Name");
+            flag = 1;
+        }
+        
+    
+    
+    }
+
+    private void resetHosData() {
+            hName.setText("");
+    }
+
+    private void showHosTable() {
+        int index = 0;
+        String[][] data = new String[hospitalMap.size()][4];
+        for ( Hospital temp : hospitalMap.values()){
+        data[index][0]= Integer.toString(temp.getHospitalId());
+        data[index][1]= temp.getName();
+        data[index][2]=temp.getCity();
+        data[index][3]= communityMap.get(temp.getCommunity()).getName();
+        index++;
+        }
+
+        String[] col = {"Hospital ID", "Hospital Name", "City","Community"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        hosTable.setModel(model);
+    
+    }
+
+    private void resetMHosData() {
+        
+            mhName.setText("");
+    }
+
+    private void ValidateMHosData() {
+                try {
+            if (mhName.getText().equals("")) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please enter Hospital Name");
+            flag = 1;
+        }
+    }
+
+    private void setlHTable() {
+        int index = 0;
+        String[][] data = new String[hospitalMap.size()][2];
+        for ( Hospital temp : hospitalMap.values()){
+        data[index][0]= Integer.toString(temp.getHospitalId());
+        data[index][1]= temp.getName();
+        index++;
+        }
+
+        String[] col = {"Hospital ID", "Hospital Name"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        lHosTable.setModel(model);
+    }
+
+    private int setlHoscommTable() {
+        int index = 0;
+        int var=0;
+        String[][] data = new String[communityMap.size()][3];
+        for ( Community temp : communityMap.values()){
+            if(temp.getCommunityId()==hospitalMap.get(hosref).getCommunity())
+                var=index;
+            
+            if(temp.getCity()== hospitalMap.get(hosref).getCity()){
+                System.out.println(temp.hospitalExists(hosref));
+                if(temp.hospitalExists(hosref)){
+                data[index][0]= Integer.toString(temp.getCommunityId());
+                data[index][1]= temp.getName();
+                data[index][2]= "Linked";
+                index++;
+                }
+                else{
+                data[index][0]= Integer.toString(temp.getCommunityId());
+                data[index][1]= temp.getName();
+                data[index][2]="Not Linked";
+                index++;
+                
+                }
+            }
+        }
+
+        String[] col = {"Community ID", "Community Name", "Status"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        lHoscommTable.setModel(model);
+        return var;
+    }
+
+    private void validateLHospital() {
+        try {
+            if (lCommTable.getSelectedRows()== null) {
+                throw new Exception("Community Link not selected");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Select Community to Link");
+            flag = 1;
+        }
+    }
+
+    private void validateUnLHospital() {
+        try {
+            if (Integer.parseInt((String) lHoscommTable.getValueAt(lHoscommTable.getSelectedRow(), NORMAL)) ==-1) {
+                throw new Exception("Community Link not selected");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Select Community to Link");
+            flag = 1;
+        }
+        if(flag == 0 ){
+            try {
+                System.out.println("Hosref community is "+ hospitalMap.get(hosref).getCommunity()+ " Commref  ");
+            if (hospitalMap.get(hosref).getCommunity() == commref) {
+                throw new Exception("Cannot remove parent Community");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Parent Community Cannot be unlinked");
+            flag = 1;
+        }
+            
+        if(flag==0){
+            try {
+            if ((String)lHoscommTable.getValueAt(lHoscommTable.getSelectedRow(), 2) == "Not Linked") {
+                throw new Exception("Hospital Already Unlinked");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Hospital is already not Linked");
+            flag = 1;
+        }
+        
+        }
+        
+        }
+    }
+
+    private void ValidateMCommData() {
+         try {
+            if (mcName.getText().equals("")) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please enter Name");
+            flag = 1;
+        }
+        
+        if(flag==0){
+            try {
+                if (mcZip.getText().equals("")) {
+                    throw new Exception("Zipcode not entered");
+                }
+            } catch (Exception e) { //exception handling
+                JOptionPane.showMessageDialog(this, "Please enter Zipcode");
+                flag = 1;
+            }
+        }
+                if(flag==0){
+            try {
+                
+                if (communityMap.get(commref).getCity() != (String) mcCity.getSelectedItem()) {
+                    if(communityMap.get(commref).hospitalLength() !=0)
+                        throw new Exception("Hospital Length not 0");
+                }
+            } catch (Exception e) { //exception handling
+                JOptionPane.showMessageDialog(this, "");
+                flag = 1;
+            }
+        }
+        
+    
+    }
+
+
 }
