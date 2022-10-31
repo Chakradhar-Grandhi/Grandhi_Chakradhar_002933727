@@ -89,4 +89,10 @@ public class Hospital {
                 tempList.add(i);
         doctors = tempList;
     }
+
+    public List<Integer> getDoctors() {
+        return doctors;
+    }
+   
+    
 }

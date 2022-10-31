@@ -18,8 +18,17 @@ public class Community {
     private String name;
     private String city;
     private String zipcode;
+    
     List<Integer> persons = new ArrayList<>();
     List<Integer> hospitals = new ArrayList<>();
+
+    public List<Integer> getHospitals() {
+        return hospitals;
+    }
+
+    public List<Integer> getPersons() {
+        return persons;
+    }
 
     public Community(int communityId, String name, String city, String zipcode) {
         this.communityId = communityId;

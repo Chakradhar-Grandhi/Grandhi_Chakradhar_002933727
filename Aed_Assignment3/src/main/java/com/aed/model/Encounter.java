@@ -15,6 +15,26 @@ public class Encounter {
     private int personId;
     private VitalSigns vitalSign;
     private String dateOfEncounter;
+    private String comment;
+
+    public Encounter(int encounterID, int personId, VitalSigns vitalSign, String dateOfEncounter, String comment, String status, int doctorId, int hospitalId) {
+        this.encounterID = encounterID;
+        this.personId = personId;
+        this.vitalSign = vitalSign;
+        this.dateOfEncounter = dateOfEncounter;
+        this.comment = comment;
+        this.status = status;
+        this.doctorId = doctorId;
+        this.hospitalId = hospitalId;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getComment() {
+        return comment;
+    }
     private String status; //can be enum("accepted","rejected","pending")
     private int doctorId;
     private int hospitalId;
@@ -35,11 +55,11 @@ public class Encounter {
         this.personId = personId;
     }
 
-    public VitalSigns getVitalSignsId() {
+    public VitalSigns getVitalSigns() {
         return vitalSign;
     }
 
-    public void setVitalSignsId(VitalSigns vitalSign) {
+    public void setVitalSigns(VitalSigns vitalSign) {
         this.vitalSign = vitalSign;
     }
 

@@ -11,9 +11,18 @@ package com.aed.model;
 public class VitalSigns {
     
     private int vitalSignsId;
-    private double temperature;
+    private int temperature;
     private int bloodPressure;
     private int heartRate;
+
+    public VitalSigns( int temperature, int bloodPressure, int heartRate) {
+        //this.vitalSignsId = vitalSignsId;
+        this.temperature = temperature;
+        this.bloodPressure = bloodPressure;
+        this.heartRate = heartRate;
+    }
+    
+    
 
     public int getVitalSignsId() {
         return vitalSignsId;
@@ -27,7 +36,7 @@ public class VitalSigns {
         return temperature;
     }
 
-    public void setTemperature(double temperature) {
+    public void setTemperature(int temperature) {
         this.temperature = temperature;
     }
 
