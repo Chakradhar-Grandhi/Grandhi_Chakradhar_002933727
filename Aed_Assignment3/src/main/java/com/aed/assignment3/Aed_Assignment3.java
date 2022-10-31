@@ -6,6 +6,7 @@
 package com.aed.assignment3;
 
 import com.aed.view.Additions;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaContrastIJTheme;
 
 /**
  *
@@ -15,6 +16,11 @@ public class Aed_Assignment3 {
 
     public static void main(String[] args) {
         
+        try{
+            FlatDraculaContrastIJTheme.setup();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
         new Additions().setVisible(true);
     }

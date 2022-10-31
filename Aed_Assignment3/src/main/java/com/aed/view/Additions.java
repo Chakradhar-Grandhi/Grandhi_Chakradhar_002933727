@@ -5,6 +5,8 @@
 package com.aed.view;
 
 import com.aed.model.Community;
+import com.aed.model.Doctor;
+import com.aed.model.Encounter;
 import com.aed.model.Hospital;
 import com.aed.model.Person;
 import java.awt.CardLayout;
@@ -25,11 +27,13 @@ import javax.swing.table.DefaultTableModel;
  * @author just_chakri
  */
 public class Additions extends javax.swing.JFrame {
-    int communityId = 100,personId=200,hospitalId=300,commref=0,flag=0,perref=0,hosref;
+    int communityId = 100,personId=200,hospitalId=300,encounterId=400,commref=0,flag=0,perref=0,hosref=0,docref=0;
     String role = "SA";
     HashMap<Integer,Community> communityMap = new HashMap<>();
     HashMap<Integer,Person> personMap = new HashMap<>();
     HashMap<Integer,Hospital> hospitalMap = new HashMap<>();
+    HashMap<Integer,Doctor> doctorMap = new HashMap<>();
+    HashMap<Integer,Encounter> encounterMap = new HashMap<>();
     
     
     
@@ -79,6 +83,7 @@ public class Additions extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         lPerson = new javax.swing.JButton();
         lHospital = new javax.swing.JButton();
+        lDoctor = new javax.swing.JButton();
         pnlLayout = new javax.swing.JPanel();
         AddDoctor = new javax.swing.JPanel();
         community = new javax.swing.JTabbedPane();
@@ -167,16 +172,11 @@ public class Additions extends javax.swing.JFrame {
         linkDoc = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        lDocTable = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        lHosDocTable = new javax.swing.JTable();
         jButton8 = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
+        deLinkDoc = new javax.swing.JButton();
         linkPerson = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -198,6 +198,8 @@ public class Additions extends javax.swing.JFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         jTable11 = new javax.swing.JTable();
         jButton15 = new javax.swing.JButton();
+        Encounter = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -243,6 +245,13 @@ public class Additions extends javax.swing.JFrame {
             }
         });
 
+        lDoctor.setText("Link Doctor");
+        lDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lDoctorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -250,14 +259,14 @@ public class Additions extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(lDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -275,7 +284,9 @@ public class Additions extends javax.swing.JFrame {
                 .addComponent(lPerson)
                 .addGap(34, 34, 34)
                 .addComponent(lHospital)
-                .addContainerGap(366, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(lDoctor)
+                .addContainerGap(313, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -288,7 +299,7 @@ public class Additions extends javax.swing.JFrame {
         AddDoctor.setLayout(AddDoctorLayout);
         AddDoctorLayout.setHorizontalGroup(
             AddDoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 869, Short.MAX_VALUE)
+            .addGap(0, 902, Short.MAX_VALUE)
         );
         AddDoctorLayout.setVerticalGroup(
             AddDoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +360,7 @@ public class Additions extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(245, 245, 245)
                         .addComponent(comSubmit)))
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,7 +440,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,7 +537,7 @@ public class Additions extends javax.swing.JFrame {
                                 .addComponent(hCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(268, 268, 268))
                             .addComponent(hComm, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(296, Short.MAX_VALUE))
         );
         addHosLayout.setVerticalGroup(
             addHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -623,7 +634,7 @@ public class Additions extends javax.swing.JFrame {
                     .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(mhComm, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(mhCity, javax.swing.GroupLayout.Alignment.LEADING, 0, 143, Short.MAX_VALUE)))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         editHosLayout.setVerticalGroup(
             editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -759,7 +770,7 @@ public class Additions extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(277, 277, 277)
                         .addComponent(pSubmit)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1002,147 +1013,100 @@ public class Additions extends javax.swing.JFrame {
 
         pnlLayout.add(person, "Person");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        lDocTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Hospital Name"
+                "Doctor ID", "Doctor Name"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        lDocTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lDocTableMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(lDocTable);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        lHosDocTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Doctor Name"
+                "Hospital ID", "Hospital Name", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(lHosDocTable);
 
         jButton8.setText("Link");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        deLinkDoc.setText("Unlink");
+        deLinkDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deLinkDocActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8)
-                .addGap(341, 341, 341))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(278, 278, 278)
+                        .addComponent(jButton8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deLinkDoc)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5))
-                .addGap(45, 45, 45)
-                .addComponent(jButton8)
-                .addContainerGap(283, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(deLinkDoc))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
 
         linkDoc.addTab("Link Doctor", jPanel7);
-
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Hospital Name"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane6.setViewportView(jTable6);
-
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Doctor Name"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane7.setViewportView(jTable7);
-
-        jButton9.setText("Unlink");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton9)
-                .addGap(344, 344, 344))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE))
-                .addGap(55, 55, 55)
-                .addComponent(jButton9)
-                .addGap(171, 171, 171))
-        );
-
-        linkDoc.addTab("Unlink Doctor", jPanel8);
 
         pnlLayout.add(linkDoc, "linkDoctor");
 
@@ -1212,7 +1176,7 @@ public class Additions extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1313,7 +1277,7 @@ public class Additions extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(304, 304, 304)
@@ -1394,7 +1358,7 @@ public class Additions extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1417,6 +1381,21 @@ public class Additions extends javax.swing.JFrame {
 
         pnlLayout.add(linkHospital, "linkHospital");
         linkHospital.getAccessibleContext().setAccessibleName("Link Hospital");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 902, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 833, Short.MAX_VALUE)
+        );
+
+        Encounter.addTab("Add Encounter", jPanel5);
+
+        pnlLayout.add(Encounter, "encounter");
 
         jSplitPane1.setRightComponent(pnlLayout);
 
@@ -1573,7 +1552,10 @@ public class Additions extends javax.swing.JFrame {
             }
              
             personMap.put(personId, new Person(personId, pName.getText(),Integer.toString(personId),"1234",(String) pRole.getSelectedItem(),Integer.valueOf(pAge.getText()),pGender.getSelection().getActionCommand(),"xyz",Integer.parseInt(pHno.getText()),(String) pCity.getSelectedItem(),temp));
-
+            if((String)pRole.getSelectedItem()=="Doctor"){
+                doctorMap.put(personId, new Doctor(personId));
+                System.out.println("Doctor Added");
+            }
              
             resetPerData();
             
@@ -1975,10 +1957,6 @@ public class Additions extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_linkHospitalMouseClicked
 
-    private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel12MouseClicked
-
     private void lHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lHospitalActionPerformed
         // TODO add your handling code here:
                 cards.show(pnlLayout, "linkHospital");
@@ -1998,9 +1976,7 @@ public class Additions extends javax.swing.JFrame {
         System.out.println("Hosref in link "+ hosref);
         if(flag==0){
         commref = Integer.parseInt((String) lHoscommTable.getValueAt(lHoscommTable.getSelectedRow(), NORMAL));
-        //personMap.get(hosref).setCommunity(commref);
-        
-      //communityMap.get(personMap.get(perref).getCommunity()).removePerson(perref);
+       
         communityMap.get(commref).addHospital(hosref);
         JOptionPane.showMessageDialog(this, " Link Successful");
         int x = setlHoscommTable();
@@ -2067,6 +2043,55 @@ public class Additions extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void lDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lDoctorActionPerformed
+        // TODO add your handling code here:
+        cards.show(pnlLayout, "linkDoctor");
+        setlDTable();
+    }//GEN-LAST:event_lDoctorActionPerformed
+
+    private void lDocTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lDocTableMouseClicked
+        // TODO add your handling code here:
+          docref=Integer.parseInt((String) lDocTable.getValueAt(lDocTable.getSelectedRow(), NORMAL));
+        setlDochosTable();
+    }//GEN-LAST:event_lDocTableMouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        flag=0;
+        validateLDoctor();
+        System.out.println("Docref in link "+ docref);
+        if(flag==0){
+        hosref = Integer.parseInt((String) lHosDocTable.getValueAt(lHosDocTable.getSelectedRow(), NORMAL));
+        //personMap.get(hosref).setCommunity(commref);
+        
+      //communityMap.get(personMap.get(perref).getCommunity()).removePerson(perref);
+        hospitalMap.get(hosref).addDoctor(docref);
+        JOptionPane.showMessageDialog(this, " Link Successful");
+        setlDochosTable();
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void deLinkDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deLinkDocActionPerformed
+        // TODO add your handling code here:
+        flag=0;
+        validateUnLDoctor();
+        System.out.println("DocLink in link "+ docref);
+        if(flag==0){
+        hosref = Integer.parseInt((String) lHosDocTable.getValueAt(lHosDocTable.getSelectedRow(), NORMAL));
+        //personMap.get(hosref).setCommunity(commref);
+        
+        hospitalMap.get(hosref).removeDoctor(docref);
+        //if(hospitalMap.get(hosref).get)
+        //communityMap.get(commref).addHospital(hosref);
+        JOptionPane.showMessageDialog(this, " DeLink Successful");
+        setlDochosTable();
+        }
+    }//GEN-LAST:event_deLinkDocActionPerformed
+
+    private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel12MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2104,6 +2129,7 @@ public class Additions extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddDoctor;
+    private javax.swing.JTabbedPane Encounter;
     private static javax.swing.JPanel addHos;
     private javax.swing.JComboBox<String> cCombo;
     private javax.swing.JTextField cName;
@@ -2111,6 +2137,7 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JButton comSubmit;
     private javax.swing.JTable commTable;
     private javax.swing.JTabbedPane community;
+    private javax.swing.JButton deLinkDoc;
     private static javax.swing.JPanel editHos;
     private javax.swing.JComboBox<String> hCity;
     private javax.swing.JComboBox<String> hComm;
@@ -2132,7 +2159,6 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2168,8 +2194,8 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
@@ -2180,19 +2206,16 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSplitPane jSplitPane1;
     private static javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable11;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
     private javax.swing.JTable lCommTable;
+    private javax.swing.JTable lDocTable;
+    private javax.swing.JButton lDoctor;
+    private javax.swing.JTable lHosDocTable;
     private javax.swing.JTable lHosTable;
     private javax.swing.JTable lHoscommTable;
     private javax.swing.JButton lHospital;
@@ -2545,12 +2568,23 @@ public class Additions extends javax.swing.JFrame {
 
     private void validateLHospital() {
         try {
-            if (lCommTable.getSelectedRows()== null) {
+            if (Integer.parseInt((String) lHosTable.getValueAt(lHosTable.getSelectedRow(), NORMAL))== -1) {
+                throw new Exception("Hospital Link not selected");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Select Hospital to Link");
+            flag = 1;
+        }
+        if(flag==0){
+        try {
+            if (Integer.parseInt((String) lHoscommTable.getValueAt(lHoscommTable.getSelectedRow(), NORMAL))== -1) {
                 throw new Exception("Community Link not selected");
             }
         } catch (Exception e) { //exception handling
             JOptionPane.showMessageDialog(this, "Select Community to Link");
             flag = 1;
+        }
+        
         }
     }
 
@@ -2636,6 +2670,101 @@ public class Additions extends javax.swing.JFrame {
         
     
     }
+
+    private void setlDTable() {
+        int index = 0;
+        String[][] data = new String[doctorMap.size()][2];
+        for ( Doctor temp : doctorMap.values()){
+        data[index][0]= Integer.toString(temp.getDocterId());
+        data[index][1]= personMap.get(temp.getDocterId()).getName();
+        index++;
+        }
+
+        String[] col = {"Doctor ID", "Doctor Name"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        lDocTable.setModel(model);
+    }
+
+    private void setlDochosTable() {
+        int index = 0;
+        int var=0;
+        String[][] data = new String[hospitalMap.size()][3];
+        for ( Hospital temp : hospitalMap.values()){
+            
+            if(temp.getCity()== personMap.get(docref).getCity()){
+                System.out.println(temp.docExists(docref));
+                if(temp.docExists(docref)){
+                data[index][0]= Integer.toString(temp.getHospitalId());
+                data[index][1]= temp.getName();
+                data[index][2]= "Linked";
+                index++;
+                }
+                else{
+                data[index][0]= Integer.toString(temp.getHospitalId());
+                data[index][1]= temp.getName();
+                data[index][2]="Not Linked";
+                index++;
+                
+                }
+            }
+        }
+
+        String[] col = {"Hospital ID", "Hospital Name", "Status"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        lHosDocTable.setModel(model);
+         
+    }
+
+    private void validateLDoctor() {
+         try {
+            if (Integer.parseInt((String) lDocTable.getValueAt(lDocTable.getSelectedRow(), NORMAL))== -1) {
+                throw new Exception("Doctor Link not selected");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Select Doctor to Link");
+            flag = 1;
+        }
+        if(flag==0){
+        try {
+            if (Integer.parseInt((String) lHosDocTable.getValueAt(lHosDocTable.getSelectedRow(), NORMAL))== -1) {
+                throw new Exception("Hospital Link not selected");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Select Hospital to Link");
+            flag = 1;
+        }
+        
+        }}
+
+    private void validateUnLDoctor() {
+        
+        try {
+            if (Integer.parseInt((String) lHosDocTable.getValueAt(lHosDocTable.getSelectedRow(), NORMAL)) ==-1) {
+                throw new Exception("Hos Link not selected");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Select Hospital to Link");
+            flag = 1;
+        }
+        
+            
+        if(flag==0){
+            try {
+            if ((String)lHosDocTable.getValueAt(lHosDocTable.getSelectedRow(), 2) == "Not Linked") {
+                throw new Exception("Doctor Already Unlinked");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Doctor is already not Linked");
+            flag = 1;
+        }
+        
+        }
+        
+        }
+    
+
 
 
 }

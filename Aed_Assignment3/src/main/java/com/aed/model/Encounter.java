@@ -13,7 +13,7 @@ public class Encounter {
 
     private int encounterID;
     private int personId;
-    private int vitalSignsId;
+    private VitalSigns vitalSign;
     private String dateOfEncounter;
     private String status; //can be enum("accepted","rejected","pending")
     private int doctorId;
@@ -35,12 +35,12 @@ public class Encounter {
         this.personId = personId;
     }
 
-    public int getVitalSignsId() {
-        return vitalSignsId;
+    public VitalSigns getVitalSignsId() {
+        return vitalSign;
     }
 
-    public void setVitalSignsId(int vitalSignsId) {
-        this.vitalSignsId = vitalSignsId;
+    public void setVitalSignsId(VitalSigns vitalSign) {
+        this.vitalSign = vitalSign;
     }
 
     public String getDateOfEncounter() {

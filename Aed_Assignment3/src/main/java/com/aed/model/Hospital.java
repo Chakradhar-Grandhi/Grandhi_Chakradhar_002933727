@@ -4,6 +4,7 @@
  */
 package com.aed.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class Hospital {
     private String name;
     private String city;
     private int community;
-    private List<Doctor> doctors;
+    List<Integer> doctors = new ArrayList<>();
 
     public Hospital(int hospitalId, String name, String city, int community) {
         this.hospitalId = hospitalId;
@@ -61,11 +62,31 @@ public class Hospital {
         this.community = community;
     }
 
-    public List<Doctor> getDoctors() {
-        return doctors;
+    public boolean docExists(int docId){
+        int flag = 0;
+        for (int i :doctors){
+            if(i==docId){
+                flag=1;
+            }
+        }
+        if(flag==1){
+            return true;
+        }
+        return false;
     }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
+        public void addDoctor(int doctorId){
+        doctors.add(doctorId);
+        System.out.println("Data Added");
+        
+                System.out.println(doctorId + "  Doctor Added");
+    
+    }
+    
+    public void removeDoctor(int doctorId){
+        List<Integer> tempList = new ArrayList<>();
+        for(int i : doctors)
+            if(i!=doctorId)
+                tempList.add(i);
+        doctors = tempList;
     }
 }
