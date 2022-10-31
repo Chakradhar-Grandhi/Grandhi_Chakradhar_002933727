@@ -15,7 +15,16 @@ public class Doctor {
 
     private int docterId;
     private String name;
+    private String city;
     private List<Hospital> hospitals;
+
+    public Doctor(int docterId, String name, String city) {
+        this.docterId = docterId;
+        this.name = name;
+        this.city = city;
+        
+    }
+    
 
     public int getDocterId() {
         return docterId;
