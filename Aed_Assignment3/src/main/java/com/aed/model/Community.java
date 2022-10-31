@@ -74,9 +74,13 @@ public class Community {
     public void removePerson(int personId){
         List<Integer> tempList = new ArrayList<>();
         for(int i : persons)
-            if(i!=personId)
+            if(i!=personId){
                 tempList.add(i);
+                
+            }
         persons = tempList;
+        System.out.println(persons.size());
+        
 
     }
     public void addHospital(int hospitalId){

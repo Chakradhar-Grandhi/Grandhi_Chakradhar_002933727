@@ -1529,6 +1529,7 @@ public class Additions extends javax.swing.JFrame {
     private void commTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_commTableMouseClicked
         // TODO add your handling code here:
         commref = Integer.parseInt(commTable.getValueAt(commTable.getSelectedRow(), NORMAL).toString());
+        System.out.println("Commref in commmouse " + commref);
         int cind=2;
         String tempCity = (String) commTable.getValueAt(commTable.getSelectedRow(),cind );
         mcName.setText(communityMap.get(commref).getName());
@@ -1539,7 +1540,7 @@ public class Additions extends javax.swing.JFrame {
             }
         }
         mcZip.setText(communityMap.get(commref).getZipcode());
-        commref = 0;
+        
         
         
     }//GEN-LAST:event_commTableMouseClicked
@@ -2057,9 +2058,10 @@ public class Additions extends javax.swing.JFrame {
                 }
             }
              
-            
+            resetCommData();
             
             showCommTable();
+                JOptionPane.showMessageDialog(this, "Community successfully Edited");
          }
         
         
@@ -2588,6 +2590,8 @@ public class Additions extends javax.swing.JFrame {
     }
 
     private void ValidateMCommData() {
+        System.out.println("Commref in validcomm " + commref);
+                System.out.println("Comm City" + communityMap.get(commref).getCity() + " Selected City" + (String) mcCity.getSelectedItem() );
          try {
             if (mcName.getText().equals("")) {
                 throw new Exception("name not entered");
@@ -2607,15 +2611,25 @@ public class Additions extends javax.swing.JFrame {
                 flag = 1;
             }
         }
-                if(flag==0){
+        if(flag==0){
             try {
-                
                 if (communityMap.get(commref).getCity() != (String) mcCity.getSelectedItem()) {
                     if(communityMap.get(commref).hospitalLength() !=0)
                         throw new Exception("Hospital Length not 0");
                 }
             } catch (Exception e) { //exception handling
-                JOptionPane.showMessageDialog(this, "");
+                JOptionPane.showMessageDialog(this, "Unlink hospitals before Changing City");
+                flag = 1;
+            }
+        }
+        if(flag==0){
+            try {
+                if (communityMap.get(commref).getCity() != (String) mcCity.getSelectedItem()) {
+                    if(communityMap.get(commref).personLength() !=0)
+                        throw new Exception("Persons Length not 0");
+                }
+            } catch (Exception e) { //exception handling
+                JOptionPane.showMessageDialog(this, "Unlink Persons before Changing City");
                 flag = 1;
             }
         }
