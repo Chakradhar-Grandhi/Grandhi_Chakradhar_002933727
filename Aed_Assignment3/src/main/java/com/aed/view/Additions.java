@@ -29,13 +29,13 @@ import javax.swing.table.DefaultTableModel;
  * @author just_chakri
  */
 public class Additions extends javax.swing.JFrame {
-    int communityId = 100,personId=200,hospitalId=300,encounterId=400,commref=0,flag=0,perref=0,hosref=0,docref=0;
-    String role = "SA";
-    HashMap<Integer,Community> communityMap = new HashMap<>();
-    HashMap<Integer,Person> personMap = new HashMap<>();
-    HashMap<Integer,Hospital> hospitalMap = new HashMap<>();
-    HashMap<Integer,Doctor> doctorMap = new HashMap<>();
-    HashMap<Integer,Encounter> encounterMap = new HashMap<>();
+    public static int communityId = 100,personId=200,hospitalId=300,encounterId=400,commref=0,flag=0,perref=0,hosref=0,docref=0,encref=0;
+    public static String role = "SA";
+    public static HashMap<Integer,Community> communityMap = new HashMap<>();
+    public static HashMap<Integer,Person> personMap = new HashMap<>();
+    public static HashMap<Integer,Hospital> hospitalMap = new HashMap<>();
+    public static HashMap<Integer,Doctor> doctorMap = new HashMap<>();
+    public static HashMap<Integer,Encounter> encounterMap = new HashMap<>();
     
     
     
@@ -53,14 +53,7 @@ public class Additions extends javax.swing.JFrame {
         
      cards = (CardLayout)( pnlLayout.getLayout() );
      // Community Data Addition
-     communityMap.put(communityId, new Community(communityId++,"Alphonsus St", "Boston","02120"));
-     communityMap.put(communityId, new Community(communityId++,"Huntington Ave", "Boston","02122"));
-     communityMap.put(communityId, new Community(communityId++,"Rivery", "New York","02123"));
-     
-     //Person Data Addition
-     personMap.put(personId, new Person(personId, "Chakradhar",Integer.toString(personId++),"1234","SA",23,"Male","xyz",75,"Boston",100));  
-     personMap.put(personId, new Person(personId, "Rakshit",Integer.toString(personId++),"1234","CA",25,"Male","xyz",75,"Boston",101));     
-     personMap.put(personId, new Person(personId, "Palak",Integer.toString(personId++),"1234","Doctor",21,"Female","xyz",881,"New York",102));        
+      
 
 
     }
@@ -79,7 +72,6 @@ public class Additions extends javax.swing.JFrame {
         mpGender = new javax.swing.ButtonGroup();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
@@ -246,13 +238,6 @@ public class Additions extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Doctor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Hospital");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,22 +295,18 @@ public class Additions extends javax.swing.JFrame {
                 .addGap(151, 151, 151)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(jButton1)
-                .addGap(58, 58, 58)
+                .addGap(225, 225, 225)
                 .addComponent(jButton2)
                 .addGap(42, 42, 42)
                 .addComponent(jButton10)
@@ -339,14 +320,12 @@ public class Additions extends javax.swing.JFrame {
                 .addComponent(lDoctor)
                 .addGap(34, 34, 34)
                 .addComponent(jButton6)
-                .addContainerGap(615, Short.MAX_VALUE))
+                .addContainerGap(891, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         pnlLayout.setLayout(new java.awt.CardLayout());
-
-        AddDoctor.setBackground(new java.awt.Color(0, 102, 102));
 
         javax.swing.GroupLayout AddDoctorLayout = new javax.swing.GroupLayout(AddDoctor);
         AddDoctor.setLayout(AddDoctorLayout);
@@ -356,7 +335,7 @@ public class Additions extends javax.swing.JFrame {
         );
         AddDoctorLayout.setVerticalGroup(
             AddDoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1223, Short.MAX_VALUE)
+            .addGap(0, 1499, Short.MAX_VALUE)
         );
 
         pnlLayout.add(AddDoctor, "Doctor");
@@ -432,7 +411,7 @@ public class Additions extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(68, 68, 68)
                 .addComponent(comSubmit)
-                .addContainerGap(877, Short.MAX_VALUE))
+                .addContainerGap(1153, Short.MAX_VALUE))
         );
 
         community.addTab("Add Community", jPanel2);
@@ -535,7 +514,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(565, Short.MAX_VALUE))
+                .addContainerGap(841, Short.MAX_VALUE))
         );
 
         community.addTab("Edit Community", jPanel3);
@@ -609,7 +588,7 @@ public class Additions extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(30, 30, 30)
                 .addComponent(jButton5)
-                .addContainerGap(948, Short.MAX_VALUE))
+                .addContainerGap(1224, Short.MAX_VALUE))
         );
 
         hospital.addTab("Add Hospital", addHos);
@@ -709,7 +688,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hEdit)
                     .addComponent(jButton7))
-                .addGap(0, 695, Short.MAX_VALUE))
+                .addGap(0, 971, Short.MAX_VALUE))
         );
 
         hospital.addTab("Edit Hospital", editHos);
@@ -837,10 +816,11 @@ public class Additions extends javax.swing.JFrame {
                     .addComponent(pAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pMale)
-                    .addComponent(pFemale)
-                    .addComponent(jLabel14))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(pMale)
+                        .addComponent(pFemale)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
@@ -985,9 +965,8 @@ public class Additions extends javax.swing.JFrame {
                             .addComponent(mpHno)
                             .addComponent(mpAge)
                             .addComponent(mpComm, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(mpRole, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(mpCity, javax.swing.GroupLayout.Alignment.LEADING, 0, 134, Short.MAX_VALUE))))
+                            .addComponent(mpRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mpCity, 0, 412, Short.MAX_VALUE)))
                     .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(154, 154, 154)
@@ -1000,7 +979,7 @@ public class Additions extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 809, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel27)
                     .addComponent(mpName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1155,7 +1134,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8)
                     .addComponent(deLinkDoc))
-                .addContainerGap(638, Short.MAX_VALUE))
+                .addContainerGap(914, Short.MAX_VALUE))
         );
 
         linkDoc.addTab("Link Doctor", jPanel7);
@@ -1244,7 +1223,7 @@ public class Additions extends javax.swing.JFrame {
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addComponent(jButton13)
-                .addContainerGap(867, Short.MAX_VALUE))
+                .addContainerGap(1143, Short.MAX_VALUE))
         );
 
         linkPerson.addTab("Link Person", jPanel4);
@@ -1349,7 +1328,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hosLink)
                     .addComponent(hosUnlink))
-                .addContainerGap(642, Short.MAX_VALUE))
+                .addContainerGap(918, Short.MAX_VALUE))
         );
 
         linkHospital.addTab("Link Hospital", jPanel11);
@@ -1423,7 +1402,7 @@ public class Additions extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane13)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE))
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1213, Short.MAX_VALUE))
                 .addGap(55, 55, 55)
                 .addComponent(jButton15)
                 .addGap(171, 171, 171))
@@ -1577,6 +1556,11 @@ public class Additions extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        encounterTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                encounterTableMouseClicked(evt);
             }
         });
         jScrollPane7.setViewportView(encounterTable);
@@ -1734,23 +1718,6 @@ public class Additions extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        cards.show(pnlLayout, "Doctor");
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        cards.show(pnlLayout, "Hospital");
-        hComm.removeAllItems();
-        for(Integer i : communityMap.keySet()){
-            if(hCity.getSelectedItem().toString()== communityMap.get(i).getCity())
-                hComm.addItem(communityMap.get(i).getName());
-            
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void cNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cNameActionPerformed
@@ -2578,6 +2545,48 @@ public class Additions extends javax.swing.JFrame {
 
     private void meEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meEditActionPerformed
         // TODO add your handling code here:
+               flag=0;
+                
+        
+         try {
+            ValidateEncounterData();
+        } catch (Exception ex) {
+            Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flag ==0){
+            int temp=0;
+            int tempPersonId = 0,tempDoctorId = 0, tempHospitalId=0;
+            
+            for(Person p : personMap.values()){
+                    if(p.getName() == (String) ePerson.getSelectedItem());
+                        tempPersonId= p.getPersonID();
+            }
+            for(Hospital p : hospitalMap.values()){
+                    if(p.getName() == (String) eHospital.getSelectedItem());
+                        tempHospitalId= p.getHospitalId();
+            }
+            
+            for(Person p : personMap.values()){
+                    if(p.getName() == (String) eDoctor.getSelectedItem());
+                        tempDoctorId= p.getPersonID();
+            }
+            
+            int tempTemp= Integer.parseInt(eTemp.getText()) ;
+            int tempBp= Integer.parseInt(eBp.getText()) ;
+            int tempHeart= Integer.parseInt(eHeart.getText()) ;
+            
+            
+            
+                       
+            
+            encounterMap.put(encounterId, new Encounter(encounterId++,tempPersonId,new VitalSigns(tempTemp,tempBp,tempHeart),eDate.getText(),eComment.getText(),"Pending",tempDoctorId,tempHospitalId));
+             
+            resetEncounterData();
+            
+            JOptionPane.showMessageDialog(this, "Data Entered");
+            
+            
+         }
         
     }//GEN-LAST:event_meEditActionPerformed
 
@@ -2593,6 +2602,23 @@ public class Additions extends javax.swing.JFrame {
         
         }
     }//GEN-LAST:event_EncounterMouseClicked
+
+    private void encounterTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_encounterTableMouseClicked
+        // TODO add your handling code here:
+        encref = Integer.parseInt((String)encounterTable.getValueAt(encounterTable.getSelectedRow(), NORMAL));
+        
+    }//GEN-LAST:event_encounterTableMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        cards.show(pnlLayout, "Hospital");
+        hComm.removeAllItems();
+        for(Integer i : communityMap.keySet()){
+            if(hCity.getSelectedItem().toString()== communityMap.get(i).getCity())
+            hComm.addItem(communityMap.get(i).getName());
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2659,17 +2685,16 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JTable hosTable;
     private javax.swing.JButton hosUnlink;
     private javax.swing.JTabbedPane hospital;
-    private static javax.swing.JButton jButton1;
-    private static javax.swing.JButton jButton10;
-    private static javax.swing.JButton jButton11;
+    public static javax.swing.JButton jButton10;
+    public static javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton15;
-    private static javax.swing.JButton jButton2;
+    public static javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    public static javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
@@ -2747,13 +2772,13 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JTable jTable11;
     private javax.swing.JTable lCommTable;
     private javax.swing.JTable lDocTable;
-    private javax.swing.JButton lDoctor;
+    public static javax.swing.JButton lDoctor;
     private javax.swing.JTable lHosDocTable;
     private javax.swing.JTable lHosTable;
     private javax.swing.JTable lHoscommTable;
-    private javax.swing.JButton lHospital;
+    public static javax.swing.JButton lHospital;
     private javax.swing.JTable lPTable;
-    private javax.swing.JButton lPerson;
+    public static javax.swing.JButton lPerson;
     private javax.swing.JTabbedPane linkDoc;
     private javax.swing.JTabbedPane linkHospital;
     private javax.swing.JTabbedPane linkPerson;

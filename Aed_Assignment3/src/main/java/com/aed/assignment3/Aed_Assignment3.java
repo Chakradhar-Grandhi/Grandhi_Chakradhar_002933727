@@ -5,7 +5,14 @@
 
 package com.aed.assignment3;
 
+import com.aed.model.Community;
+import com.aed.model.Person;
 import com.aed.view.Additions;
+import static com.aed.view.Additions.communityId;
+import static com.aed.view.Additions.communityMap;
+import static com.aed.view.Additions.personId;
+import static com.aed.view.Additions.personMap;
+import com.aed.view.LoginJFrame;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaContrastIJTheme;
 
 /**
@@ -13,6 +20,8 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaContras
  * @author just_chakri
  */
 public class Aed_Assignment3 {
+
+ 
 
     public static void main(String[] args) {
         
@@ -22,6 +31,6 @@ public class Aed_Assignment3 {
             e.printStackTrace();
         }
         
-        new Additions().setVisible(true);
+        new LoginJFrame().setVisible(true);
     }
 }
