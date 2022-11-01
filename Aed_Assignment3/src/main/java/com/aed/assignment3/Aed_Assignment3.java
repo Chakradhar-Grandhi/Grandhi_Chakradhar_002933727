@@ -31,6 +31,6 @@ public class Aed_Assignment3 {
             e.printStackTrace();
         }
         
-        new LoginJFrame().setVisible(true);
+        new LoginJFrame(0).setVisible(true);
     }
 }

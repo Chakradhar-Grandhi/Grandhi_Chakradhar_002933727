@@ -30,7 +30,8 @@ public class LoginJFrame extends javax.swing.JFrame {
     int trycatch = 0;
     public static Person loggedInPerson;
 
-    public LoginJFrame() {
+    public LoginJFrame(int flag) {
+        if(flag == 0){
      Additions.communityMap.put(Additions.communityId, new Community(Additions.communityId++,"Alphonsus St", "Boston","02120"));
      Additions.communityMap.put(Additions.communityId, new Community(Additions.communityId++,"Huntington Ave", "Boston","02122"));
      Additions.communityMap.put(Additions.communityId, new Community(Additions.communityId++,"Rivery", "New York","02123"));
@@ -45,6 +46,17 @@ public class LoginJFrame extends javax.swing.JFrame {
         userImgLabel.setIcon(new ImageIcon(new ImageIcon(userImage).getImage().getScaledInstance(userImgLabel.getWidth(), userImgLabel.getHeight(), Image.SCALE_SMOOTH)));
         passImgLabel.setIcon(new ImageIcon(new ImageIcon(passImage).getImage().getScaledInstance(passImgLabel.getWidth(), passImgLabel.getHeight(), Image.SCALE_SMOOTH)));
     }
+    else{
+       initComponents();
+        loggedInPerson = null;
+        signInButton.setForeground(Color.white);
+        userImgLabel.setIcon(new ImageIcon(new ImageIcon(userImage).getImage().getScaledInstance(userImgLabel.getWidth(), userImgLabel.getHeight(), Image.SCALE_SMOOTH)));
+        passImgLabel.setIcon(new ImageIcon(new ImageIcon(passImage).getImage().getScaledInstance(passImgLabel.getWidth(), passImgLabel.getHeight(), Image.SCALE_SMOOTH)));
+ 
+
+    }
+    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,6 +75,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         passField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1314, 1499));
 
         signInButton.setText("Sign In");
         signInButton.setToolTipText("");
@@ -146,19 +159,25 @@ public class LoginJFrame extends javax.swing.JFrame {
         else {
             try {
                 if (loginAction().equals("SA")) {
+ 
+                    Additions.role="SA";
                     new Additions().show();
                     dispose();
                 } else if (loginAction().equals("HA")) {
+                    Additions.role="HA";
                     new Additions().show();
                     dispose();
                 } else if (loginAction().equals("CA")) {
+                    Additions.role="CA";
                     new Additions().show();
 
                     dispose();
                 } else if (loginAction().equals("Person")) {
+                    Additions.role="Person";
                     new Additions().show();
                     dispose();
                 } else if (loginAction().equals("Doctor")) {
+                    Additions.role="Doctor";
                     new Additions().show();
 
                     dispose();
@@ -199,7 +218,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginJFrame().setVisible(true);
+                new LoginJFrame(0).setVisible(true);
             }
         });
     }

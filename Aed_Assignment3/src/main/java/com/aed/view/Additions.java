@@ -10,6 +10,7 @@ import com.aed.model.Encounter;
 import com.aed.model.Hospital;
 import com.aed.model.Person;
 import com.aed.model.VitalSigns;
+import com.aed.view.LoginJFrame;
 import java.awt.CardLayout;
 import java.time.Clock;
 import java.util.ArrayList;
@@ -50,6 +51,56 @@ public class Additions extends javax.swing.JFrame {
      
     public Additions() {
         initComponents();
+                    if(role=="SA"){
+                    Person.setVisible(true);
+                    Community.setVisible(true);
+                    Hospital.setVisible(true); 
+                    lPerson.setVisible(true);
+                    lHospital.setVisible(true); 
+                    lDoctor.setVisible(true);
+                    encounter.setVisible(true);
+                    }
+                    
+                    if(role=="HA"){
+                    Person.setVisible(false);
+                    Community.setVisible(false);
+                    Hospital.setVisible(false); 
+                    lPerson.setVisible(false);
+                    lHospital.setVisible(false); 
+                    lDoctor.setVisible(true);
+                    encounter.setVisible(true);
+                    }
+                    
+                    if(role=="CA"){
+                    Person.setVisible(false);
+                    Community.setVisible(false);
+                    Hospital.setVisible(false); 
+                    lPerson.setVisible(true);
+                    lHospital.setVisible(true); 
+                    lDoctor.setVisible(false);
+                    encounter.setVisible(false);
+                    }
+                    
+                    if(role=="Doctor"){
+                    Person.setVisible(false);
+                    Community.setVisible(false);
+                    Hospital.setVisible(false); 
+                    lPerson.setVisible(false);
+                    lHospital.setVisible(false); 
+                    lDoctor.setVisible(false);
+                    encounter.setVisible(true);
+                    }
+                    
+                    if(role=="Person"){
+                    Person.setVisible(false);
+                    Community.setVisible(false);
+                    Hospital.setVisible(false); 
+                    lPerson.setVisible(false);
+                    lHospital.setVisible(false); 
+                    lDoctor.setVisible(false);
+                    encounter.setVisible(true);
+                    }
+                    
         
      cards = (CardLayout)( pnlLayout.getLayout() );
      // Community Data Addition
@@ -72,13 +123,14 @@ public class Additions extends javax.swing.JFrame {
         mpGender = new javax.swing.ButtonGroup();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        Hospital = new javax.swing.JButton();
+        Community = new javax.swing.JButton();
+        Person = new javax.swing.JButton();
         lPerson = new javax.swing.JButton();
         lHospital = new javax.swing.JButton();
         lDoctor = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        encounter = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
         pnlLayout = new javax.swing.JPanel();
         AddDoctor = new javax.swing.JPanel();
         community = new javax.swing.JTabbedPane();
@@ -238,24 +290,24 @@ public class Additions extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Hospital");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Hospital.setText("Hospital");
+        Hospital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                HospitalActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Community");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        Community.setText("Community");
+        Community.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                CommunityActionPerformed(evt);
             }
         });
 
-        jButton11.setText("Person");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        Person.setText("Person");
+        Person.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                PersonActionPerformed(evt);
             }
         });
 
@@ -280,10 +332,17 @@ public class Additions extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("Encounter");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        encounter.setText("Encounter");
+        encounter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                encounterActionPerformed(evt);
+            }
+        });
+
+        logout.setText("Log Out");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
             }
         });
 
@@ -294,33 +353,37 @@ public class Additions extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(encounter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Hospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Community, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Person, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lHospital, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(225, 225, 225)
-                .addComponent(jButton2)
-                .addGap(42, 42, 42)
-                .addComponent(jButton10)
-                .addGap(46, 46, 46)
-                .addComponent(jButton11)
-                .addGap(36, 36, 36)
+                .addGap(261, 261, 261)
+                .addComponent(Person)
+                .addGap(18, 18, 18)
+                .addComponent(Community)
+                .addGap(18, 18, 18)
+                .addComponent(Hospital)
+                .addGap(18, 18, 18)
                 .addComponent(lPerson)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(lHospital)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(lDoctor)
-                .addGap(34, 34, 34)
-                .addComponent(jButton6)
-                .addContainerGap(891, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(encounter)
+                .addGap(18, 18, 18)
+                .addComponent(logout)
+                .addContainerGap(928, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -1726,7 +1789,7 @@ public class Additions extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void PersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonActionPerformed
             // TODO add your handling code here:
             
         cards.show(pnlLayout, "Person");
@@ -1737,12 +1800,12 @@ public class Additions extends javax.swing.JFrame {
             
         }
         
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_PersonActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void CommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommunityActionPerformed
         // TODO add your handling code here:
         cards.show(pnlLayout, "Community");
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_CommunityActionPerformed
 
     private void cComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cComboActionPerformed
         // TODO add your handling code here:
@@ -2445,7 +2508,7 @@ public class Additions extends javax.swing.JFrame {
         
     }//GEN-LAST:event_eSubmitActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void encounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encounterActionPerformed
         // TODO add your handling code here:
         cards.show(pnlLayout, "encounter");
         
@@ -2454,7 +2517,7 @@ public class Additions extends javax.swing.JFrame {
             ePerson.addItem(i.getName());
             
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_encounterActionPerformed
 
     private void ePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ePersonActionPerformed
         // TODO add your handling code here:
@@ -2609,7 +2672,7 @@ public class Additions extends javax.swing.JFrame {
         
     }//GEN-LAST:event_encounterTableMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void HospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HospitalActionPerformed
         // TODO add your handling code here:
         cards.show(pnlLayout, "Hospital");
         hComm.removeAllItems();
@@ -2618,7 +2681,13 @@ public class Additions extends javax.swing.JFrame {
             hComm.addItem(communityMap.get(i).getName());
 
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_HospitalActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+        new LoginJFrame(1).show();
+        dispose();
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2657,7 +2726,10 @@ public class Additions extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddDoctor;
+    public static javax.swing.JButton Community;
     private javax.swing.JTabbedPane Encounter;
+    public static javax.swing.JButton Hospital;
+    public static javax.swing.JButton Person;
     private static javax.swing.JPanel addHos;
     private javax.swing.JComboBox<String> cCombo;
     private javax.swing.JTextField cName;
@@ -2676,6 +2748,7 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JButton eSubmit;
     private javax.swing.JTextField eTemp;
     private static javax.swing.JPanel editHos;
+    public static javax.swing.JButton encounter;
     private javax.swing.JTable encounterTable;
     private javax.swing.JComboBox<String> hCity;
     private javax.swing.JComboBox<String> hComm;
@@ -2685,16 +2758,12 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JTable hosTable;
     private javax.swing.JButton hosUnlink;
     private javax.swing.JTabbedPane hospital;
-    public static javax.swing.JButton jButton10;
-    public static javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton15;
-    public static javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    public static javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
@@ -2782,6 +2851,7 @@ public class Additions extends javax.swing.JFrame {
     private javax.swing.JTabbedPane linkDoc;
     private javax.swing.JTabbedPane linkHospital;
     private javax.swing.JTabbedPane linkPerson;
+    private javax.swing.JButton logout;
     private javax.swing.JComboBox<String> mcCity;
     private javax.swing.JTextField mcName;
     private javax.swing.JTextField mcZip;
