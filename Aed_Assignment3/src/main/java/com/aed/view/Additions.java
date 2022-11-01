@@ -30,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
  * @author just_chakri
  */
 public class Additions extends javax.swing.JFrame {
-    public static int communityId = 100,personId=200,hospitalId=300,encounterId=400,commref=0,flag=0,perref=0,hosref=0,docref=0,encref=0;
+    public static int communityId = 100,personId=200,hospitalId=300,encounterId=400,commref=0,flag=0,perref=0,hosref=0,docref=0,encref=0,sysid;
     public static String role = "SA";
     public static HashMap<Integer,Community> communityMap = new HashMap<>();
     public static HashMap<Integer,Person> personMap = new HashMap<>();
@@ -692,6 +692,11 @@ public class Additions extends javax.swing.JFrame {
         });
 
         jButton7.setText("Delete");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         mhCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "New York", "California" }));
         mhCity.addActionListener(new java.awt.event.ActionListener() {
@@ -716,7 +721,7 @@ public class Additions extends javax.swing.JFrame {
                 .addComponent(hEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton7)
-                .addGap(184, 184, 184))
+                .addGap(299, 299, 299))
             .addGroup(editHosLayout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addGroup(editHosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -999,6 +1004,11 @@ public class Additions extends javax.swing.JFrame {
         jScrollPane11.setViewportView(perTable);
 
         jButton12.setText("Delete");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1006,8 +1016,9 @@ public class Additions extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addGap(103, 103, 103)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel27)
                             .addComponent(jLabel26)
@@ -1015,34 +1026,33 @@ public class Additions extends javax.swing.JFrame {
                             .addComponent(jLabel25)
                             .addComponent(jLabel24)
                             .addComponent(jLabel23)
-                            .addComponent(jLabel21)
-                            .addComponent(jLabel20))
-                        .addGap(82, 82, 82)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21))
+                        .addGap(61, 61, 61)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pUpload1)
                             .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addComponent(mpMale)
                                 .addGap(18, 18, 18)
                                 .addComponent(mpFemale))
-                            .addComponent(mpName, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                            .addComponent(mpName)
                             .addComponent(mpHno)
                             .addComponent(mpAge)
                             .addComponent(mpComm, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mpRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mpCity, 0, 412, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mpRole, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mpCity, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
+                        .addGap(191, 191, 191)
                         .addComponent(pEdit)
                         .addGap(252, 252, 252)
                         .addComponent(jButton12)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 809, Short.MAX_VALUE)
+                .addGap(68, 68, 68)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel27)
                     .addComponent(mpName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1062,22 +1072,19 @@ public class Additions extends javax.swing.JFrame {
                         .addComponent(jLabel24))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mpRole)))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel23))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mpCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(mpRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(9, 9, 9)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(mpCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(mpComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel21)
-                    .addComponent(mpHno, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mpHno, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pUpload1)
@@ -1086,7 +1093,7 @@ public class Additions extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pEdit)
                     .addComponent(jButton12))
-                .addGap(79, 79, 79))
+                .addContainerGap(820, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Modify Person Details", jPanel10);
@@ -1787,6 +1794,33 @@ public class Additions extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        flag=0;
+                
+        
+         try {
+            ValidateRMCommData();
+        } catch (Exception ex) {
+            Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flag ==0){
+            int temp=0,commflag=Integer.parseInt((String) commTable.getValueAt(commTable.getSelectedRow(), NORMAL));
+
+                
+      
+            
+            HashMap<Integer, Community> tempcom = new HashMap<>();
+            for(Community i: communityMap.values()){
+                if(i.getCommunityId()!=commflag)
+                    tempcom.put(i.getCommunityId(), i);
+            }
+            communityMap=tempcom;
+             
+            resetCommData();
+            
+            showCommTable();
+                JOptionPane.showMessageDialog(this, "Community successfully Deleted");
+         }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void PersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonActionPerformed
@@ -2376,7 +2410,7 @@ public class Additions extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-                                flag=0;
+        flag=0;
                 
         
          try {
@@ -2688,6 +2722,108 @@ public class Additions extends javax.swing.JFrame {
         new LoginJFrame(1).show();
         dispose();
     }//GEN-LAST:event_logoutActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+                // TODO add your handling code here:
+                        flag=0;
+                
+        
+         try {
+            ValidateMPerData();
+        } catch (Exception ex) {
+            Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flag ==0){
+            int temp=0,personflag=Integer.parseInt((String) perTable.getValueAt(perTable.getSelectedRow(), NORMAL));
+            for(Community comm : communityMap.values()){
+                if(comm.getName() == (String) mpComm.getSelectedItem()){
+                    
+                    temp = comm.getCommunityId();
+                    break;
+                }
+            }
+                System.out.println(temp + "Community ID");
+                
+                
+            
+            communityMap.get(personMap.get(personflag).getCommunity()).removePerson(personflag);
+            HashMap<Integer,Person> tempPerson = new HashMap<>();
+            for(Person i :personMap.values()){
+                if(i.getPersonID()!=personflag)
+                    tempPerson.put(i.getPersonID(), i);
+                
+            }
+            personMap = tempPerson;
+
+            
+          
+             
+            resetMPerData();
+            
+            JOptionPane.showMessageDialog(this, "Data Deleted");
+
+            
+
+            
+            
+            showPerTable();
+         }
+
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+                flag=0;
+                
+        
+         try {
+            ValidateRHosData();
+        } catch (Exception ex) {
+            Logger.getLogger(Additions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(flag ==0){
+            int temp=0,hospitalflag=Integer.parseInt((String) hosTable.getValueAt(hosTable.getSelectedRow(), NORMAL));
+            for(Community comm : communityMap.values()){
+                if(comm.getName() == (String) mhComm.getSelectedItem()){
+                    
+                    temp = comm.getCommunityId();
+                    System.out.println("Community    "+temp);
+                    break;
+                }
+            }
+            
+                
+                
+            
+            communityMap.get(hospitalMap.get(hospitalflag).getCommunity()).removeHospital(hospitalflag);
+            
+            for(Hospital i : hospitalMap.values()){
+                if(i.getHospitalId()== hospitalflag){
+                i.setName(mhName.getText());
+                i.setCity((String)mhCity.getSelectedItem());
+                i.setCommunity(temp);
+                }
+            }
+             
+            resetMHosData();
+            
+            JOptionPane.showMessageDialog(this, "Data Edited");
+            for(Community i : communityMap.values()){
+                //System.out.println("Going inside");
+                if(i.getName()== (String)mhComm.getSelectedItem()){
+                    i.addHospital(hospitalflag);
+                    System.out.println("Added new Community  "+ hospitalflag);
+                    
+                }
+                //System.out.println(i.xyz());
+            }
+            
+            
+            showHosTable();
+         }
+    
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3513,6 +3649,66 @@ public class Additions extends javax.swing.JFrame {
 
         DefaultTableModel model = new DefaultTableModel(data, col);
         encounterTable.setModel(model);
+        
+    }
+
+    private void ValidateRMCommData() {
+        
+        System.out.println("Commref in validcomm " + commref);
+         try {
+            if ( Integer.parseInt((String) commTable.getValueAt(commTable.getSelectedRow(), NORMAL))==-1 ) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please select Community to Delete");
+            flag = 1;
+        }
+        
+        if(flag==0){
+            try {
+                if (mcZip.getText().equals("")) {
+                    throw new Exception("Zipcode not entered");
+                }
+            } catch (Exception e) { //exception handling
+                JOptionPane.showMessageDialog(this, "Please enter Zipcode");
+                flag = 1;
+            }
+        }
+        if(flag==0){
+            try {
+                if (communityMap.get(commref).getCity() != (String) mcCity.getSelectedItem()) {
+                    if(communityMap.get(commref).hospitalLength() !=0)
+                        throw new Exception("Hospital Length not 0");
+                }
+            } catch (Exception e) { //exception handling
+                JOptionPane.showMessageDialog(this, "Unlink hospitals before Deleting City");
+                flag = 1;
+            }
+        }
+        if(flag==0){
+            try {
+                if (communityMap.get(commref).getCity() != (String) mcCity.getSelectedItem()) {
+                    if(communityMap.get(commref).personLength() !=0)
+                        throw new Exception("Persons Length not 0");
+                }
+            } catch (Exception e) { //exception handling
+                JOptionPane.showMessageDialog(this, "Unlink Persons before Deleting City");
+                flag = 1;
+            }
+        }
+        
+    
+    }
+
+    private void ValidateRHosData() {
+        try {
+            if ( Integer.parseInt((String) hosTable.getValueAt(hosTable.getSelectedRow(), NORMAL)) == -1 ) {
+                throw new Exception("name not entered");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please select Hospital to Delete");
+            flag = 1;
+        }
         
     }
     

@@ -137,7 +137,7 @@ public class LoginJFrame extends javax.swing.JFrame {
                 try {
                     if (set.getPassword().equals(passField.getText())) {
                         
-                        Additions.perref = set.getPersonID();
+                        Additions.sysid = set.getPersonID();
                         //System.err.println("in login function"+set.getPersonID());
                         return set.getRole();
                     } else {

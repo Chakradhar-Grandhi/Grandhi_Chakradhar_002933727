@@ -93,6 +93,10 @@ public class Hospital {
     public List<Integer> getDoctors() {
         return doctors;
     }
+
+    public int docSize() {
+        return doctors.size();
+    }
    
     
 }
