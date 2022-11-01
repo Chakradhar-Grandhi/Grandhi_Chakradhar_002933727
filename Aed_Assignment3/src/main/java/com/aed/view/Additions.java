@@ -2134,11 +2134,11 @@ public class Additions extends javax.swing.JFrame {
 
     private void lPTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lPTableMouseClicked
         // TODO add your handling code here:
-        perref=Integer.parseInt((String) lPTable.getValueAt(lPTable.getSelectedRow(), NORMAL));
+        int tperref=Integer.parseInt((String) lPTable.getValueAt(lPTable.getSelectedRow(), NORMAL));
         
 //        System.out.println("PERREF in link Click" + perref);
 //        System.out.println("Community in personClick   "+ personMap.get(perref).getCommunity());
-        int x = setlCommTable();
+        int x = setlCommTable(tperref);
         lCommTable.setRowSelectionInterval(x, x);
         
         
@@ -3050,7 +3050,8 @@ public class Additions extends javax.swing.JFrame {
     }
 
     private void setlPTable() {
-                int index = 0;
+        if(role=="SA"){
+        int index = 0;
         String[][] data = new String[personMap.size()][2];
         for ( Person temp : personMap.values()){
         data[index][0]= Integer.toString(temp.getPersonID());
@@ -3063,10 +3064,27 @@ public class Additions extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(data, col);
         lPTable.setModel(model);
    
-    
+    }
+        else {
+        int index = 0;
+        String[][] data = new String[personMap.size()][2];
+        for ( Person temp : personMap.values()){
+            if(temp.getCity()==personMap.get(perref).getCity()){
+        data[index][0]= Integer.toString(temp.getPersonID());
+        data[index][1]= temp.getName();
+        index++;
+            }
+        }
+
+        String[] col = {"Person ID", "Person Name"};
+
+        DefaultTableModel model = new DefaultTableModel(data, col);
+        lPTable.setModel(model);
+        
+        }
     }
 
-    private int setlCommTable() {
+    private int setlCommTable(int perref) {
         int index = 0;
         int var=0;
         String[][] data = new String[communityMap.size()][2];
