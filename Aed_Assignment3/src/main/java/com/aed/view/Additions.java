@@ -2508,6 +2508,7 @@ public class Additions extends javax.swing.JFrame {
             int temp=0;
             int tempPersonId = 0,tempDoctorId = 0, tempHospitalId=0;
             for(Person p : personMap.values()){
+                System.out.println((String)ePerson.getSelectedItem());
                     if(p.getName() == (String) ePerson.getSelectedItem());
                         tempPersonId= p.getPersonID();
             }
@@ -2680,7 +2681,7 @@ public class Additions extends javax.swing.JFrame {
              
             resetEncounterData();
             
-            JOptionPane.showMessageDialog(this, "Data Entered");
+            JOptionPane.showMessageDialog(this, "Data Edited");
             
             
          }
@@ -3703,11 +3704,23 @@ public class Additions extends javax.swing.JFrame {
     private void ValidateRHosData() {
         try {
             if ( Integer.parseInt((String) hosTable.getValueAt(hosTable.getSelectedRow(), NORMAL)) == -1 ) {
-                throw new Exception("name not entered");
+                throw new Exception("link not selected");
             }
         } catch (Exception e) { //exception handling
             JOptionPane.showMessageDialog(this, "Please select Hospital to Delete");
             flag = 1;
+        }
+        
+        if(flag==0){
+            try {
+               int var =Integer.parseInt((String) hosTable.getValueAt(hosTable.getSelectedRow(), NORMAL)); 
+            if ( hospitalMap.get(var).docSize() !=0  ) {
+                throw new Exception("doclist not empty");
+            }
+        } catch (Exception e) { //exception handling
+            JOptionPane.showMessageDialog(this, "Please unLink doctors to Delete");
+            flag = 1;
+        }
         }
         
     }
