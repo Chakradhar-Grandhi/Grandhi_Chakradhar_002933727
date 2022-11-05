@@ -5,6 +5,7 @@
 package com.aed.view;
 
 import com.aed.view.Additions;
+import com.aed.view.Register;
 import com.aed.exceptions.CustomException;
 import com.aed.model.Community;
 import com.aed.model.Person;
@@ -15,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -31,6 +33,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     public static Person loggedInPerson;
 
     public LoginJFrame(int flag) {
+        
         if(flag == 0){
      Additions.communityMap.put(Additions.communityId, new Community(Additions.communityId++,"Alphonsus St", "Boston","02120"));
      Additions.communityMap.put(Additions.communityId, new Community(Additions.communityId++,"Huntington Ave", "Boston","02122"));
@@ -39,7 +42,10 @@ public class LoginJFrame extends javax.swing.JFrame {
      //Person Data Addition
      Additions.personMap.put(Additions.personId, new Person(Additions.personId, "Chakradhar",Integer.toString(Additions.personId++),"1234","SA",23,"Male","xyz",75,"Boston",100));  
      Additions.personMap.put(Additions.personId, new Person(Additions.personId, "Rakshit",Integer.toString(Additions.personId++),"1234","CA",25,"Male","xyz",75,"Boston",101));     
-     Additions.personMap.put(Additions.personId, new Person(Additions.personId, "Palak",Integer.toString(Additions.personId++),"1234","Doctor",21,"Female","xyz",881,"New York",102)); 
+     Additions.personMap.put(Additions.personId, new Person(Additions.personId, "Palak",Integer.toString(Additions.personId++),"1234","CA",21,"Female","xyz",881,"Boston",100));    
+     Additions.personMap.put(Additions.personId, new Person(Additions.personId, "Manthan",Integer.toString(Additions.personId++),"1234","Person",21,"Male","xyz",882,"Boston",101));    
+     Additions.personMap.put(Additions.personId, new Person(Additions.personId, "Yash",Integer.toString(Additions.personId++),"1234","Person",21,"Male","xyz",883,"Boston",101)); 
+     Additions.personMap.put(Additions.personId, new Person(Additions.personId, "Gaurang",Integer.toString(Additions.personId++),"1234","Person",25,"Male","xyz",75,"Boston",100)); 
         initComponents();
         loggedInPerson = null;
         signInButton.setForeground(Color.white);
@@ -51,6 +57,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         loggedInPerson = null;
         signInButton.setForeground(Color.white);
         userImgLabel.setIcon(new ImageIcon(new ImageIcon(userImage).getImage().getScaledInstance(userImgLabel.getWidth(), userImgLabel.getHeight(), Image.SCALE_SMOOTH)));
+        
         passImgLabel.setIcon(new ImageIcon(new ImageIcon(passImage).getImage().getScaledInstance(passImgLabel.getWidth(), passImgLabel.getHeight(), Image.SCALE_SMOOTH)));
  
 
@@ -72,12 +79,14 @@ public class LoginJFrame extends javax.swing.JFrame {
         loginLabel = new javax.swing.JLabel();
         userImgLabel = new javax.swing.JLabel();
         passImgLabel = new javax.swing.JLabel();
-        passField = new javax.swing.JTextField();
+        passField = new javax.swing.JPasswordField();
+        photo = new javax.swing.JLabel();
+        signInButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1314, 1499));
 
-        signInButton.setText("Sign In");
+        signInButton.setText("Login");
         signInButton.setToolTipText("");
         signInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +94,24 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         });
 
-        loginLabel.setText("Login");
+        loginLabel.setFont(new java.awt.Font("Kokonor", 3, 30)); // NOI18N
+        loginLabel.setForeground(new java.awt.Color(204, 204, 204));
+        loginLabel.setText("   Login");
+
+        passImgLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passImgLabelMouseClicked(evt);
+            }
+        });
+
+        signInButton1.setForeground(new java.awt.Color(204, 204, 204));
+        signInButton1.setText("Signup");
+        signInButton1.setToolTipText("");
+        signInButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signInButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,37 +119,45 @@ public class LoginJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(200, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(userImgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(passImgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(signInButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(206, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(userImgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                            .addComponent(passImgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(photo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(passField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(loginLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(userNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(signInButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(17, 17, 17)
+                .addComponent(photo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userImgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(passImgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43)
-                .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                        .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(userImgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(passImgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(signInButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,6 +222,24 @@ public class LoginJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_signInButtonActionPerformed
 
+    private void passImgLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passImgLabelMouseClicked
+        // TODO add your handling code here:
+        if(trycatch==0){
+            passField.setEchoChar((char)0);
+            trycatch=1;
+        }
+        else{
+            passField.setEchoChar('*');
+            trycatch=0;
+        }
+    }//GEN-LAST:event_passImgLabelMouseClicked
+
+    private void signInButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButton1ActionPerformed
+        // TODO add your handling code here:
+        new Register().show();
+        dispose();
+    }//GEN-LAST:event_signInButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -225,9 +277,11 @@ public class LoginJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel loginLabel;
-    private javax.swing.JTextField passField;
+    private javax.swing.JPasswordField passField;
     private javax.swing.JLabel passImgLabel;
+    private javax.swing.JLabel photo;
     private javax.swing.JButton signInButton;
+    private javax.swing.JButton signInButton1;
     private javax.swing.JLabel userImgLabel;
     private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables
