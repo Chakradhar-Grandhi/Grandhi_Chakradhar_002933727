@@ -2509,16 +2509,16 @@ public class Additions extends javax.swing.JFrame {
             int tempPersonId = 0,tempDoctorId = 0, tempHospitalId=0;
             for(Person p : personMap.values()){
                 System.out.println((String)ePerson.getSelectedItem());
-                    if(p.getName() == (String) ePerson.getSelectedItem())
+                    if(p.getName() == (String) ePerson.getSelectedItem());
                         tempPersonId= p.getPersonID();
             }
             for(Hospital p : hospitalMap.values()){
-                    if(p.getName() == (String) eHospital.getSelectedItem())
+                    if(p.getName() == (String) eHospital.getSelectedItem());
                         tempHospitalId= p.getHospitalId();
             }
             
             for(Person p : personMap.values()){
-                    if(p.getName() == (String) eDoctor.getSelectedItem())
+                    if(p.getName() == (String) eDoctor.getSelectedItem());
                         tempDoctorId= p.getPersonID();
             }
             
