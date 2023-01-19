@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BostonPizeria</title>\
+    <style>
+        *{
+            margin: 0;
+            padding: 0;  
+        }
+        .favs {
+            float: left;
+            height: 200px;
+            margin: auto;
+        }
+        .col{
+            float: left;
+            width: 50%;
+            padding: 5px;
+        }
+        .col1{
+            width: 33.3%; 
+            padding: 5px;
+            
+            height:300px;
+            margin: auto;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        .row{
+            display: flex; 
+            float: left;
+         }
+         .header{
+         background-color:rgba(0, 0, 0, 0.724) ;
+         text-align: left;
+         height: 70px;
+        }
+
+        .flex{
+            display: flex;
+        }
+        #menu-mar{
+        margin-left: 480px;
+         }
+
+         .button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 12px 21px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 14px 40px;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+
+  .logo{
+    color: white;
+    margin-left:20px; 
+    font-size:20px;
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <span class="logo">BostonPizeria</span>
+       <a href="menu.html" class="button" id="menu-mar">MENU</a>
+       <a href="book.html" class="button">ORDER NOW </a>
+       <a href="form.html" class="button">BOOK A TABLE</a>
+    </div>
+
+    <div style="text-align:center; padding-top: 20px; padding-bottom: 20px; color: rgb(0, 0, 0) !important ; font: 6em sans-serif;background-color: #bb3434;" >
+       <p> <em>BOSTON PIZZERIA <em><p>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <img src="imgs/rod-long-WC7LeX79iEU-unsplash.jpg" alt="Pic1" style="width: 100%; border:2px black solid;"> 
+        </div>
+        <div class="col">
+            <img src="imgs/pizzapic.webp" alt="BostonPizeria" style="width: 100%;height: 435px; border:2px black solid;">
+        </div>
+    </div>
+    <b style="margin:auto; margin-left: 530px; font-size: 50px; color:rgb(0, 0, 0)"><em>OUR TOP PICKS</em> </b>
+    
+    <div class="flex">
+        
+        <div class="col1"> 
+            <img src="imgs/buffalo.jpeg" alt="B1" width="100%" style="height:inherit; border:2px black solid;">
+            <div class="desc">Buffalo Slice</div>
+        </div>
+        <div class="col1"> 
+            <img src="imgs/pepparoni.webp" alt="B1" width="100%" style="height:inherit;">
+            <div class="desc">Pepparoni</div>
+        </div>
+        <div class="col1"> 
+            <img src="imgs/margharita.webp" alt="B1" width="100%" style="height:inherit;">
+            <div class="desc">Margharita</div>
+        </div>
+        </div>
+</body>
+</html>

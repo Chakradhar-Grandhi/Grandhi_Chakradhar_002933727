@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BBF | Menu</title>
+        <link rel="icon" type="image" href="imgs/icons8-form-50.png">
+        <style>
+            * {
+              margin: 0;
+              padding: 0;
+            }
+
+            .header{
+            background-color:brown ;
+            text-align: left;
+            height: 80px;
+
+            } 
+            .pos{
+            position:absolute;
+            } 
+
+            table, th, td {
+            border:1px solid black;
+            }
+            th,td{
+                padding: 10px
+            }
+        </style>
+
+        <link rel="stylesheet" href="app.css">
+        
+    </head>
+    <body class="background-col">
+
+        <script>
+            function orderPlace() {
+            document.getElementById("submitPage").innerHTML = "Order Placed!✅";
+        }
+        </script>   
+<div>
+    <div class="header">
+        <span class="logo">BBFBurger</span>
+        <a href="index.html" class="button" id="menu-mar">HOME</a>
+        <a href="menu.html" class="button" >MENU</a>
+        <a href="aboutUS.html" class="button">ABOUT US </a>
+        <a href="form.html" class="button">BOOK A TABLE</a>
+  </div>
+  <div style="text-align:center; padding-top: 20px; padding-bottom: 20px; color: black !important ; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman';font-size:50px ;background-color: #c9995c;" >
+    BOSTON BURGER FACTORY 🍽
+  </div>
+    <div >
+        <h1 style="text-align:center ;">
+            MENU
+        </h1>
+   </div>
+   <div>
+        <table style="margin-left:200px">
+                <tr>
+                    <th>APPETIZER</th>
+                    <th>DESCRIPTION</th>
+                    <th>$</th>
+                    <th>Quantity</th>
+                </tr>
+                <tr>
+                    <td>Jamaican Burger</td>
+                    <td>Grilled Chicken mixed with jamaican sauce,bacon,egg,BBQ sauce along with our famous fries</td>
+                    <td>$25</td>
+                    <td><input type="number"></td>
+                
+                </tr>
+                <tr>
+                    <td>Big Daddy Burger</td>
+                    <td>Grilled Chicken mixed with jamaican sauce,bacon,egg,BBQ sauce along with our famous fries</td>
+                    <td>$15</td> 
+                    <td><input type="number"></td>           
+                </tr>
+                <tr>
+                    <td>MAD Burger</td>
+                    <td>Grilled Chicken mixed with jamaican sauce,bacon,egg,BBQ sauce along with our famous fries</td>
+                    <td>$20</td> 
+                    <td><input type="number"></td>           
+                </tr>
+                <tr>
+                    <td>JIMMIS Burger</td>
+                    <td>Grilled Chicken mixed with jamaican sauce,bacon,egg,BBQ sauce along with our famous fries</td>
+                    <td>$20</td> 
+                    <td><input type="number"></td>           
+                </tr>
+                <tr>
+                    <td>VEGAN Burger</td>
+                    <td>Grilled Chicken mixed with jamaican sauce,bacon,egg,BBQ sauce along with our famous fries</td>
+                    <td>$20</td> 
+                    <td><input type="number"></td>           
+                </tr>
+            </table>
+            <div>
+                <button type="button" name="submitButton" style="margin-left: 720px;
+                margin-top: 10px;" onclick="orderPlace()">Submit</button>
+            </div>
+
+            <p id="submitPage" style="text-align:center ; font-size: xx-large;"></p>
+            
+            </div> 
+        </div>
+    </div>
+
+</div>
+
+    </body>
+</html>
