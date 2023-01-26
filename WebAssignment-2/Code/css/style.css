@@ -110,10 +110,14 @@ main section {
 #about-me {
   display: flex;
 }
+
 #hp  {
-  float: right;    
-   margin: 0 0 0 15px;
-  }
+  float: right;
+  height:350px;
+  width: 250px;
+  margin: 0 0 0 15px;
+}
+
 .info {
   display: flex;
   flex-wrap: wrap;
@@ -189,6 +193,11 @@ main section {
 
 
 @media screen and (max-width: 767px) {
+  #hp {
+    width: 200px;
+    height: 250px;
+  }
+
   #work h1 {
     padding: 0px;
   }
@@ -214,6 +223,12 @@ main section {
 }
 
 @media screen and (max-width: 480px) {
+
+  #hp {
+    width: 150px;
+    height: 200px;
+  }
+
   .lesser-image{
     width: 100%;
   }
